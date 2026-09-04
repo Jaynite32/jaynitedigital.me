@@ -38,6 +38,14 @@ img{max-width:100%;display:block}
 /* ===== Header ===== */
 header{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(246,245,242,0.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--line);transition:var(--ease)}
 header.scrolled{background:rgba(246,245,242,0.98);box-shadow:var(--shadow-sm)}
+
+/* Mobile-only: two-row header (utility bar + centered brand band) */
+.header-utility{display:flex;justify-content:space-between;align-items:center;padding:.65rem 20px}
+.header-utility .logo-icon-link{display:flex}
+.header-brand-band{background:var(--ink);color:#fff;text-align:center;padding:.5rem 20px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.92rem;letter-spacing:.02em}
+@media (min-width:768px){ .header-utility, .header-brand-band{display:none} }
+@media (max-width:767.98px){ .header-content{display:none} }
+
 .header-content{display:flex;justify-content:space-between;align-items:center;padding:.75rem 0}
 .logo{display:flex;align-items:center;gap:.5rem;text-decoration:none;font-family:'Space Grotesk',sans-serif;color:var(--ink);flex:1;min-width:0;margin-right:.75rem}
 .logo-img{width:32px;height:32px;border-radius:8px;object-fit:cover;flex-shrink:0}
@@ -81,8 +89,9 @@ header.scrolled{background:rgba(246,245,242,0.98);box-shadow:var(--shadow-sm)}
 .mobile-menu-body{flex:1;padding:.5rem 20px 1.5rem}
 .mm-list{list-style:none}
 .mm-list>li{border-bottom:1px solid var(--line)}
-.mm-list>li>a,.mm-list>li>.mm-toggle{display:flex;align-items:center;justify-content:space-between;width:100%;text-decoration:none;color:var(--ink);font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:1.15rem;padding:1.15rem 0;background:none;border:none;text-align:left;cursor:pointer}
-.mm-list>li>a.active{color:var(--orange)}
+.mm-list>li>a,.mm-list>li>.mm-toggle{display:flex;align-items:center;justify-content:space-between;width:100%;text-decoration:none;color:var(--ink);font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:1.15rem;padding:1.15rem 20px;margin:0 -20px;background:none;border:none;text-align:left;cursor:pointer}
+.mm-list>li>a.active{color:var(--orange);background:rgba(255,107,53,.08)}
+.mm-list>li>.mm-toggle.active{color:var(--orange);background:rgba(255,107,53,.08)}
 .mm-toggle .caret{font-size:.85rem;color:#9aa4b2;transition:transform .25s}
 .mm-toggle.active .caret{transform:rotate(180deg);color:var(--orange)}
 .mm-submenu{display:none;list-style:none;padding:0 0 1rem .3rem;animation:slideDown .25s ease}
@@ -126,14 +135,6 @@ header.scrolled{background:rgba(246,245,242,0.98);box-shadow:var(--shadow-sm)}
   .hero-strip .container{justify-content:space-between}
 }
 
-/* ===== Mission / Vision strip ===== */
-.mv-strip{background:var(--white);padding:2.5rem 0}
-.mv-grid{display:grid;grid-template-columns:1fr;gap:1.2rem}
-.mv-card{background:var(--paper);border-radius:var(--radius);padding:1.5rem;border:1px solid var(--line)}
-.mv-card h3{display:flex;align-items:center;gap:.55rem;color:var(--ink);font-size:1.02rem;margin-bottom:.5rem}
-.mv-card h3 i{color:var(--orange)}
-.mv-card p{color:var(--ink-soft);font-size:.88rem}
-
 /* ===== Section header ===== */
 .section-header{text-align:center;max-width:620px;margin:0 auto 2.4rem}
 .section-header .eyebrow{color:var(--orange);background:rgba(255,107,53,.1);border-color:rgba(255,107,53,.3)}
@@ -153,21 +154,22 @@ header.scrolled{background:rgba(246,245,242,0.98);box-shadow:var(--shadow-sm)}
 
 /* ===== Services ===== */
 .services{padding:3.8rem 0}
-.services-grid{display:grid;grid-template-columns:1fr;gap:1.1rem}
-.service-card{background:var(--white);border-radius:var(--radius);padding:1.5rem;box-shadow:var(--shadow-sm);border:1px solid var(--line);transition:var(--ease);position:relative}
-.service-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md);border-color:transparent}
-.service-icon{width:46px;height:46px;border-radius:10px;background:var(--grad-orange);display:flex;align-items:center;justify-content:center;margin-bottom:1rem}
-.service-icon i{color:#fff;font-size:1.15rem}
-.service-card h3{font-size:1rem;font-weight:700;color:var(--ink);margin-bottom:.5rem}
-.service-card p{color:var(--ink-soft);font-size:.86rem;margin-bottom:1rem}
-.service-btn{color:var(--orange);text-decoration:none;font-weight:700;font-size:.84rem;display:inline-flex;align-items:center;gap:.4rem}
-.service-btn i{transition:var(--ease);font-size:.75rem}
-.service-btn:hover i{transform:translateX(4px)}
-.badge-external{position:absolute;top:1.1rem;right:1.1rem;font-size:.65rem;color:#9aa4b2;background:var(--paper);padding:.18rem .5rem;border-radius:20px}
+.services-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.7rem}
+.service-photo-card{position:relative;display:block;border-radius:var(--radius);overflow:hidden;aspect-ratio:4/3;background:var(--grad-ink);text-decoration:none;box-shadow:var(--shadow-sm);transition:var(--ease)}
+.service-photo-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md)}
+.service-photo-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.service-photo-card:hover img{transform:scale(1.06)}
+.spc-scrim{position:absolute;inset:0;background:linear-gradient(0deg,rgba(11,26,46,.92) 0%,rgba(11,26,46,.45) 55%,rgba(11,26,46,.15) 100%)}
+.spc-icon{position:absolute;top:.9rem;left:.9rem;width:38px;height:38px;border-radius:9px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;color:#fff;font-size:1rem}
+.spc-text{position:absolute;left:0;right:0;bottom:0;padding:1rem}
+.spc-text h3{color:#fff;font-size:.98rem;font-weight:700;margin-bottom:.3rem}
+.spc-text p{color:rgba(255,255,255,.78);font-size:.78rem}
+
 
 /* ===== Toolkit accordion ===== */
 .toolkit{padding:3.8rem 0;background:var(--white)}
-.toolkit-list{display:flex;flex-direction:column;gap:.65rem;max-width:760px;margin:0 auto}
+.toolkit-list{display:grid;grid-template-columns:1fr;gap:.65rem;max-width:900px;margin:0 auto;align-items:start}
+@media (min-width:768px){ .toolkit-list{grid-template-columns:repeat(2,1fr)} }
 .toolkit-item{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--paper)}
 .toolkit-head{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1.05rem 1.3rem;cursor:pointer;user-select:none}
 .toolkit-head .th-left{display:flex;align-items:center;gap:.9rem}
@@ -237,7 +239,6 @@ footer{background:var(--ink);color:#fff;padding:3rem 0 1.3rem}
   .nav-desktop{display:block}
   .header-cta{display:block}
   .menu-toggle{display:none}
-  .mv-grid{grid-template-columns:1fr 1fr}
   .services-grid{grid-template-columns:repeat(2,1fr)}
   .testimonials-grid{grid-template-columns:repeat(2,1fr)}
   .footer-content{grid-template-columns:repeat(4,1fr);gap:2.3rem}
@@ -245,7 +246,7 @@ footer{background:var(--ink);color:#fff;padding:3rem 0 1.3rem}
   .footer-content-wrapper{display:block !important}
 }
 @media (min-width:1024px){
-  .services-grid{grid-template-columns:repeat(3,1fr)}
+  .services-grid{grid-template-columns:repeat(4,1fr)}
 }
 </style>
 </head>
@@ -253,6 +254,19 @@ footer{background:var(--ink);color:#fff;padding:3rem 0 1.3rem}
 
 <!-- Header -->
 <header id="siteHeader">
+  <!-- Mobile-only: utility bar (menu + logo icon) -->
+  <div class="header-utility">
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <a href="index.html" class="logo-icon-link">
+      <img src="images/logo.png" alt="Jaynite Digital Solutions logo" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <span class="logo-mark" style="display:none"><i class="fas fa-bolt"></i></span>
+    </a>
+  </div>
+  <!-- Mobile-only: brand band -->
+  <a href="index.html" class="header-brand-band" style="display:block;text-decoration:none">Jaynite Digital Solutions</a>
+
   <div class="container header-content">
     <a href="index.html" class="logo">
       <img src="images/logo.png" alt="Jaynite Digital Solutions logo" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
@@ -290,10 +304,6 @@ footer{background:var(--ink);color:#fff;padding:3rem 0 1.3rem}
     <div class="header-cta">
       <a href="https://wa.me/233201485621" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Chat on WhatsApp</a>
     </div>
-
-    <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
   </div>
 </header>
 
@@ -385,20 +395,6 @@ footer{background:var(--ink);color:#fff;padding:3rem 0 1.3rem}
   </div>
 </section>
 
-<!-- Mission / Vision -->
-<section class="mv-strip">
-  <div class="container mv-grid">
-    <div class="mv-card">
-      <h3><i class="fas fa-bullseye"></i> Our Mission</h3>
-      <p>To empower individuals and businesses in Ghana with cutting-edge digital solutions, fostering innovation and technological advancement across the nation.</p>
-    </div>
-    <div class="mv-card">
-      <h3><i class="fas fa-eye"></i> Our Vision</h3>
-      <p>To be Ghana's leading digital transformation partner, creating a future where technology bridges opportunities and drives sustainable growth.</p>
-    </div>
-  </div>
-</section>
-
 <!-- Gallery strip -->
 <section class="gallery">
   <div class="container">
@@ -441,62 +437,56 @@ footer{background:var(--ink);color:#fff;padding:3rem 0 1.3rem}
       <p>From software to store-front services — comprehensive solutions tailored for your success.</p>
     </div>
     <div class="services-grid">
-      <div class="service-card">
-        <div class="service-icon"><i class="fas fa-laptop-code"></i></div>
-        <h3>Web &amp; App Development</h3>
-        <p>Modern, responsive websites and software/app development built for performance and growth.</p>
-        <a href="services.html#web" class="service-btn">Learn More <i class="fas fa-arrow-right"></i></a>
-      </div>
-      <div class="service-card">
-        <div class="service-icon"><i class="fas fa-pen-nib"></i></div>
-        <h3>UI/UX Design</h3>
-        <p>User-centered design that creates memorable digital experiences across every device.</p>
-        <a href="services.html#uiux" class="service-btn">Learn More <i class="fas fa-arrow-right"></i></a>
-      </div>
-      <div class="service-card">
-        <div class="service-icon"><i class="fas fa-shield-alt"></i></div>
-        <h3>Cybersecurity</h3>
-        <p>Protecting digital assets with risk assessments and best-practice security implementation.</p>
-        <a href="services.html#security" class="service-btn">Learn More <i class="fas fa-arrow-right"></i></a>
-      </div>
-      <div class="service-card">
-        <div class="service-icon"><i class="fas fa-bullhorn"></i></div>
-        <h3>Digital Marketing</h3>
-        <p>Strategic campaigns that boost your online presence and reach the right audience.</p>
-        <a href="services.html#marketing" class="service-btn">Learn More <i class="fas fa-arrow-right"></i></a>
-      </div>
-      <div class="service-card">
-        <div class="service-icon"><i class="fas fa-print"></i></div>
-        <h3>Printing &amp; Publications</h3>
-        <p>Flyers, banners, picture frames, t-shirts, scanning and photocopying — walk-in or delivered.</p>
-        <a href="services.html#printing" class="service-btn">Learn More <i class="fas fa-arrow-right"></i></a>
-      </div>
-      <div class="service-card">
-        <div class="service-icon"><i class="fas fa-desktop"></i></div>
-        <h3>Computers &amp; IT Accessories</h3>
-        <p>Laptops, computers and IT accessories for home, school and office use.</p>
-        <a href="services.html#computers" class="service-btn">Learn More <i class="fas fa-arrow-right"></i></a>
-      </div>
-      <div class="service-card">
-        <div class="service-icon"><i class="fas fa-chalkboard-teacher"></i></div>
-        <h3>Home &amp; Online Tutoring</h3>
-        <p>Professional tutoring in various subjects and technical skills, in person or online.</p>
-        <a href="services.html#tutoring" class="service-btn">Learn More <i class="fas fa-arrow-right"></i></a>
-      </div>
-      <div class="service-card">
-        <div class="service-icon"><i class="fas fa-sim-card"></i></div>
-        <h3>Data Bundles</h3>
-        <p>Affordable MTN, Telecel and AirtelTigo data bundles, purchased instantly online.</p>
-        <a href="https://www.cheapdata.shop/shop/primedata-jaynite-digital-solutions-mkfmqvnc" target="_blank" rel="noopener" class="service-btn">Buy Data <i class="fas fa-arrow-right"></i></a>
-        <span class="badge-external">External site</span>
-      </div>
-      <div class="service-card">
-        <div class="service-icon"><i class="fas fa-graduation-cap"></i></div>
-        <h3>Results Checkers &amp; Forms</h3>
-        <p>BECE/WASSCE checker pins, and university forms handled on request.</p>
-        <a href="services.html#checkers" class="service-btn">Learn More <i class="fas fa-arrow-right"></i></a>
-      </div>
+      <a href="services.html#web" class="service-photo-card">
+        <img src="images/service-web.jpg" alt="Web and app development" onerror="this.style.display='none';">
+        <div class="spc-scrim"></div>
+        <span class="spc-icon"><i class="fas fa-laptop-code"></i></span>
+        <div class="spc-text"><h3>Web &amp; App Development</h3><p>Modern, responsive websites and apps built for performance.</p></div>
+      </a>
+      <a href="services.html#uiux" class="service-photo-card">
+        <img src="images/service-uiux.jpg" alt="UI and UX design" onerror="this.style.display='none';">
+        <div class="spc-scrim"></div>
+        <span class="spc-icon"><i class="fas fa-pen-nib"></i></span>
+        <div class="spc-text"><h3>UI/UX Design</h3><p>User-centered design across every device.</p></div>
+      </a>
+      <a href="services.html#security" class="service-photo-card">
+        <img src="images/service-security.jpg" alt="Cybersecurity" onerror="this.style.display='none';">
+        <div class="spc-scrim"></div>
+        <span class="spc-icon"><i class="fas fa-shield-alt"></i></span>
+        <div class="spc-text"><h3>Cybersecurity</h3><p>Risk assessments and best-practice protection.</p></div>
+      </a>
+      <a href="services.html#cloud" class="service-photo-card">
+        <img src="images/service-cloud.jpg" alt="Cloud computing" onerror="this.style.display='none';">
+        <div class="spc-scrim"></div>
+        <span class="spc-icon"><i class="fas fa-cloud"></i></span>
+        <div class="spc-text"><h3>Cloud Computing</h3><p>Cloud setup, migration and storage solutions.</p></div>
+      </a>
+      <a href="services.html#marketing" class="service-photo-card">
+        <img src="images/service-marketing.jpg" alt="Digital marketing" onerror="this.style.display='none';">
+        <div class="spc-scrim"></div>
+        <span class="spc-icon"><i class="fas fa-bullhorn"></i></span>
+        <div class="spc-text"><h3>Digital Marketing</h3><p>Campaigns that grow your online presence.</p></div>
+      </a>
+      <a href="services.html#printing" class="service-photo-card">
+        <img src="images/service-printing.jpg" alt="Printing and publications" onerror="this.style.display='none';">
+        <div class="spc-scrim"></div>
+        <span class="spc-icon"><i class="fas fa-print"></i></span>
+        <div class="spc-text"><h3>Printing &amp; Publications</h3><p>Flyers, banners, frames, t-shirts &amp; more.</p></div>
+      </a>
+      <a href="services.html#computers" class="service-photo-card">
+        <img src="images/service-computers.jpg" alt="Computers and IT accessories" onerror="this.style.display='none';">
+        <div class="spc-scrim"></div>
+        <span class="spc-icon"><i class="fas fa-desktop"></i></span>
+        <div class="spc-text"><h3>Computers &amp; IT Accessories</h3><p>Laptops and devices for home, school &amp; office.</p></div>
+      </a>
+      <a href="services.html#tutoring" class="service-photo-card">
+        <img src="images/service-tutoring.jpg" alt="Home and online tutoring" onerror="this.style.display='none';">
+        <div class="spc-scrim"></div>
+        <span class="spc-icon"><i class="fas fa-chalkboard-teacher"></i></span>
+        <div class="spc-text"><h3>Home &amp; Online Tutoring</h3><p>In person or online, for every subject.</p></div>
+      </a>
     </div>
+    <p style="text-align:center;margin-top:1.6rem;font-size:.88rem;color:var(--ink-soft)">Also need <a href="https://www.cheapdata.shop/shop/primedata-jaynite-digital-solutions-mkfmqvnc" target="_blank" rel="noopener" style="color:var(--orange);font-weight:700;text-decoration:none">data bundles</a> or <a href="services.html#checkers" style="color:var(--orange);font-weight:700;text-decoration:none">results checkers &amp; forms</a>? We've got those too.</p>
   </div>
 </section>
 
