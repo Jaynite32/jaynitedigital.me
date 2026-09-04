@@ -207,6 +207,60 @@ header {
 .trust-item { display: flex; align-items: center; gap: 0.6rem; color: var(--text-muted); font-size: 0.85rem; font-weight: 500; font-family: 'JetBrains Mono', monospace; }
 .trust-item i { color: var(--cyan-glow); }
 
+/* Scroll cue arrow — mobile hero only, hidden everywhere else by default */
+.scroll-cue { display: none; position: absolute; left: 50%; bottom: 14px; transform: translateX(-50%); width: 34px; height: 34px; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.15); border-radius: 50%; color: var(--cyan-glow); z-index: 3; background: rgba(3,10,22,0.4); backdrop-filter: blur(4px); animation: cueBounce 2s ease-in-out infinite; }
+@keyframes cueBounce { 0%,100% { transform: translate(-50%,0); opacity:0.55; } 50% { transform: translate(-50%,6px); opacity:1; } }
+
+/* ============================================
+   MOBILE HERO REDESIGN (<=767px only)
+   Desktop hero above is untouched.
+   ============================================ */
+@media (max-width: 767px) {
+  .hero { min-height: 100svh; padding-top: 74px; flex-direction: column; align-items: stretch; justify-content: flex-start; }
+  .hero-content { padding: 2rem 0 1.5rem; flex: none; }
+  .hero-strip { flex: none; width: 100%; }
+
+  .tech-badge { font-size: 0.66rem; padding: 0.35rem 0.85rem 0.35rem 0.7rem; margin-bottom: 1.1rem; gap: 0.45rem; }
+  .tech-badge i { color: var(--cyan-glow); font-size: 0.68rem; }
+  .tech-badge::before { animation: badgePulse 1.8s ease-in-out infinite; }
+  @keyframes badgePulse { 0%,100% { opacity: 1; box-shadow: 0 0 8px var(--cyan-glow); } 50% { opacity: 0.35; box-shadow: 0 0 2px var(--cyan-glow); } }
+
+  .hero h1 { font-size: clamp(2.15rem, 9vw, 2.7rem); line-height: 1.08; margin-bottom: 0.9rem; }
+  .hero .subtitle { font-size: 0.97rem; line-height: 1.55; margin-bottom: 1.7rem; max-width: 100%; }
+
+  .hero-buttons { flex-direction: column; gap: 0.75rem; margin-bottom: 1.6rem; }
+  .hero-buttons .btn { width: 100%; justify-content: center; padding: 1rem 1.2rem; font-size: 0.85rem; }
+
+  .slide-dots { justify-content: center; margin-bottom: 0.2rem; }
+
+  /* Trust strip becomes a swipeable chip row — fixes the text getting cut off at the screen edge */
+  .hero-strip { padding: 0.85rem 0 1rem; }
+  .hero-strip .container {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 0.6rem;
+    scrollbar-width: none;
+  }
+  .hero-strip .container::-webkit-scrollbar { display: none; }
+  .hero-strip .trust-item {
+    flex: 0 0 auto;
+    white-space: nowrap;
+    scroll-snap-align: start;
+    background: rgba(0, 229, 255, 0.06);
+    border: 1px solid rgba(0, 229, 255, 0.18);
+    padding: 0.5rem 0.9rem;
+    border-radius: 30px;
+    font-size: 0.7rem;
+    gap: 0.5rem;
+  }
+
+  .scroll-cue { display: flex; }
+}
+
 /* Stats Bar */
 .stat-band { padding: 3rem 0; border-bottom: var(--glass-border); position: relative; }
 .stat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
@@ -430,17 +484,17 @@ footer { background: #02040a; border-top: var(--glass-border); color: var(--text
   <div class="hero-content">
     <div class="container">
       <div class="slide active" data-slide="0">
-        <span class="tech-badge">Web &amp; App Engineering</span>
+        <span class="tech-badge"><i class="fas fa-code"></i> Web &amp; App Engineering</span>
         <h1>Empowering <span>Digital Innovation</span> Across Ghana</h1>
         <p class="subtitle">Next-generation websites, scalable mobile apps, UI/UX systems, and enterprise cybersecurity built to scale your business online.</p>
       </div>
       <div class="slide" data-slide="1">
-        <span class="tech-badge">Print &amp; Digital Media</span>
+        <span class="tech-badge"><i class="fas fa-print"></i> Print &amp; Digital Media</span>
         <h1>Print, Publish &amp; <span>Deliver</span> Anywhere</h1>
         <p class="subtitle">High-impact flyers, banners, custom apparel, frames, and commercial publication printing with nationwide delivery.</p>
       </div>
       <div class="slide" data-slide="2">
-        <span class="tech-badge">Utility &amp; EdTech Hub</span>
+        <span class="tech-badge"><i class="fas fa-graduation-cap"></i> Utility &amp; EdTech Hub</span>
         <h1>Data, Devices &amp; <span>Learning Solutions</span></h1>
         <p class="subtitle">Instant data bundle top-ups, IT hardware procurement, specialized academic tutoring, and online result checkers.</p>
       </div>
@@ -465,6 +519,8 @@ footer { background: #02040a; border-top: var(--glass-border); color: var(--text
       <div class="trust-item"><i class="fas fa-shield-halved"></i> 100% Secure Digital Infrastructure</div>
     </div>
   </div>
+
+  <div class="scroll-cue" aria-hidden="true"><i class="fas fa-chevron-down"></i></div>
 </section>
 
 <!-- Stats Bar -->
