@@ -1,522 +1,744 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jaynite Digital</title>
-  <style>
-    /* CORE STYLES & DARK THEME */
-    :root {
-      --bg-dark: #0b0f17;
-      --bg-card: #131b2e;
-      --bg-logo: #1c273d;
-      --text-main: #ffffff;
-      --text-muted: #94a3b8;
-      --accent-blue: #00d2ff;
-      --accent-orange: #ff5722;
-      --border-color: #1e293b;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jaynite Digital Solutions - High-Tech Digital Agency</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-dark: #050811;
+  --bg-card: rgba(13, 22, 41, 0.75);
+  --bg-card-hover: rgba(22, 36, 66, 0.85);
+  --border-glow: rgba(0, 229, 255, 0.18);
+  --border-glow-active: rgba(0, 229, 255, 0.5);
+  
+  --cyan-glow: #00e5ff;
+  --electric-blue: #2979ff;
+  --neon-orange: #ff6e40;
+  --text-main: #f0f4f8;
+  --text-muted: #8a99ad;
+  
+  --glass-bg: rgba(7, 13, 26, 0.65);
+  --glass-border: 1px solid rgba(255, 255, 255, 0.08);
+  --glass-blur: blur(16px);
+  --shadow-glow: 0 0 30px rgba(0, 229, 255, 0.12);
+  --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
 
-    * {
-      box-sizing: border-box;
-    }
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  line-height: 1.6;
+  overflow-x: hidden;
+  background-image: 
+    radial-gradient(circle at 15% 15%, rgba(41, 121, 255, 0.08) 0%, transparent 40%),
+    radial-gradient(circle at 85% 60%, rgba(0, 229, 255, 0.05) 0%, transparent 40%),
+    radial-gradient(circle at 50% 90%, rgba(255, 110, 64, 0.05) 0%, transparent 50%);
+  background-attachment: fixed;
+}
 
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: system-ui, -apple-system, sans-serif;
-      background-color: var(--bg-dark);
-      color: var(--text-main);
-    }
+/* Canvas Background grid pattern */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 0;
+}
 
-    /* HEADER & MAIN LOGO */
-    .site-header {
-      padding: 12px 20px;
-      background: var(--bg-dark);
-      border-bottom: 1px solid var(--border-color);
-      position: relative;
-      z-index: 10;
-    }
+.container { max-width: 1240px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
 
-    .nav-container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.85rem 1.6rem;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
 
-    .hamburger-btn {
-      background: none;
-      border: none;
-      cursor: pointer;
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-      padding: 5px;
-    }
+.btn-cyan {
+  background: linear-gradient(135deg, var(--cyan-glow), var(--electric-blue));
+  color: #030a16;
+  box-shadow: 0 0 20px rgba(0, 229, 255, 0.3);
+  border: none;
+}
+.btn-cyan:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 30px rgba(0, 229, 255, 0.5);
+  color: #000;
+}
 
-    .hamburger-btn span {
-      display: block;
-      width: 25px;
-      height: 2px;
-      background-color: var(--accent-blue);
-    }
+.btn-orange {
+  background: linear-gradient(135deg, var(--neon-orange), #d84315);
+  color: #fff;
+  box-shadow: 0 0 20px rgba(255, 110, 64, 0.3);
+  border: none;
+}
+.btn-orange:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 30px rgba(255, 110, 64, 0.5);
+}
 
-    .brand-logo {
-      width: 48px;
-      height: 48px;
-      border-radius: 12px;
-      background-color: var(--bg-logo);
-      padding: 6px;
-      object-fit: contain;
-    }
+.btn-outline {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--text-main);
+  backdrop-filter: var(--glass-blur);
+}
+.btn-outline:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--cyan-glow);
+  color: var(--cyan-glow);
+}
 
-    /* FIXED SIDEBAR & HIGH-CONTRAST LINKS */
-    .sidebar-menu {
-      position: fixed;
-      top: 0;
-      left: -320px;
-      width: 300px;
-      height: 100vh;
-      background-color: var(--bg-dark);
-      z-index: 9999;
-      transition: left 0.3s ease;
-      overflow-y: auto;
-      box-shadow: 4px 0 15px rgba(0, 0, 0, 0.6);
-      padding: 20px;
-    }
+/* Header */
+header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  border-bottom: var(--glass-border);
+  transition: var(--transition);
+}
 
-    .sidebar-menu.active {
-      left: 0;
-    }
+.header-utility { display: flex; justify-content: space-between; align-items: center; padding: 1rem 20px; }
+.logo-icon { width: 42px; height: 42px; object-fit: cover; border-radius: 8px; border: 1px solid var(--border-glow); }
+.logo-mark { width: 42px; height: 42px; background: linear-gradient(135deg, var(--cyan-glow), var(--electric-blue)); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #000; font-size: 1.2rem; }
 
-    .sidebar-header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding-bottom: 20px;
-      border-bottom: 1px solid var(--border-color);
-    }
+@media (min-width: 900px) {
+  .header-utility { display: none; }
+  .header-desktop { display: flex; align-items: center; justify-content: space-between; padding: 0.9rem 0; }
+  .brand-lockup { display: flex; align-items: center; gap: 0.8rem; text-decoration: none; color: var(--text-main); font-weight: 800; font-size: 1.15rem; letter-spacing: -0.02em; }
+  .brand-lockup span { background: linear-gradient(135deg, #fff, var(--text-muted)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  
+  .nav-desktop ul { display: flex; list-style: none; align-items: center; gap: 2rem; }
+  .nav-desktop a { text-decoration: none; color: var(--text-muted); font-weight: 600; font-size: 0.85rem; letter-spacing: 0.04em; text-transform: uppercase; transition: var(--transition); }
+  .nav-desktop a.active, .nav-desktop a:hover { color: var(--cyan-glow); text-shadow: 0 0 10px rgba(0, 229, 255, 0.5); }
+  
+  .nav-desktop li.has-dropdown { position: relative; }
+  .dropdown {
+    position: absolute; top: 100%; left: -10px; min-width: 290px;
+    background: rgba(7, 13, 26, 0.95);
+    backdrop-filter: var(--glass-blur);
+    border: var(--glass-border);
+    border-radius: 12px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.6), var(--shadow-glow);
+    padding: 0.6rem 0; opacity: 0; visibility: hidden;
+    transform: translateY(12px); transition: var(--ease, var(--transition));
+    z-index: 100;
+  }
+  .has-dropdown:hover .dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+  .dropdown a { display: flex; align-items: center; gap: 0.8rem; padding: 0.7rem 1.2rem; font-size: 0.82rem; text-transform: none; letter-spacing: 0; color: var(--text-muted); }
+  .dropdown a:hover { background: rgba(0, 229, 255, 0.08); color: var(--cyan-glow); }
+  .dropdown a i { width: 18px; color: var(--cyan-glow); }
+  .dropdown-divider { height: 1px; background: rgba(255,255,255,0.08); margin: 0.4rem 1rem; }
+}
 
-    .sidebar-brand-logo {
-      width: 54px;
-      height: 54px;
-      border-radius: 12px;
-      background-color: var(--bg-logo);
-      padding: 6px;
-      object-fit: contain;
-    }
+.menu-toggle { display: flex; flex-direction: column; gap: 6px; width: 26px; background: none; border: none; cursor: pointer; }
+.menu-toggle span { width: 100%; height: 2px; background: var(--cyan-glow); box-shadow: 0 0 8px var(--cyan-glow); }
 
-    .sidebar-brand-title {
-      font-size: 1.1rem;
-      font-weight: bold;
-      color: #a855f7;
-    }
+/* Mobile Menu */
+.mobile-menu { position: fixed; inset: 0; background: rgba(5, 8, 17, 0.98); backdrop-filter: var(--glass-blur); transform: translateY(-100%); transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); z-index: 2000; display: flex; flex-direction: column; overflow-y: auto; }
+.mobile-menu.active { transform: translateY(0); }
+.mm-top { display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 20px; border-bottom: var(--glass-border); }
+.mm-close { background: none; border: none; font-size: 2rem; color: var(--cyan-glow); cursor: pointer; }
+.mm-body { flex: 1; padding: 1rem 0; }
+.mm-list { list-style: none; }
+.mm-list>li { border-bottom: 1px solid rgba(255,255,255,0.04); }
+.mm-list>li>a, .mm-list>li>.mm-toggle { display: flex; align-items: center; justify-content: space-between; width: 100%; text-decoration: none; color: var(--text-main); font-weight: 600; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.04em; padding: 1.1rem 20px; background: none; border: none; text-align: left; }
+.mm-submenu { display: none; list-style: none; background: rgba(0,0,0,0.3); }
+.mm-submenu.active { display: block; }
+.mm-submenu li a { display: flex; align-items: center; gap: 0.8rem; padding: 0.8rem 20px 0.8rem 2.5rem; font-size: 0.88rem; color: var(--text-muted); text-decoration: none; }
 
-    .close-btn {
-      margin-left: auto;
-      background: none;
-      border: none;
-      color: var(--text-main);
-      font-size: 1.8rem;
-      cursor: pointer;
-    }
+/* Hero Section */
+.hero { position: relative; min-height: 100vh; display: flex; align-items: center; padding-top: 80px; overflow: hidden; }
+.hero-bg-layer { position: absolute; inset: 0; z-index: 0; }
+.hero-bg-slide { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0; filter: brightness(0.25) contrast(1.2); transition: opacity 1.2s ease; }
+.hero-bg-slide.active { opacity: 1; }
+.hero-scrim { position: absolute; inset: 0; background: radial-gradient(circle at center, transparent 0%, var(--bg-dark) 90%); }
 
-    .sidebar-nav ul {
-      list-style: none;
-      padding: 0;
-      margin: 20px 0;
-    }
+.hero-content { position: relative; z-index: 2; width: 100%; padding: 4rem 0; }
+.tech-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(0, 229, 255, 0.08); border: 1px solid rgba(0, 229, 255, 0.3); color: var(--cyan-glow); padding: 0.4rem 1rem; border-radius: 30px; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1.5rem; backdrop-filter: var(--glass-blur); box-shadow: 0 0 15px rgba(0, 229, 255, 0.15); }
+.tech-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--cyan-glow); box-shadow: 0 0 8px var(--cyan-glow); }
 
-    .sidebar-nav li {
-      margin-bottom: 12px;
-    }
+.slide { display: none; }
+.slide.active { display: block; animation: neonFadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) both; }
+@keyframes neonFadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-    /* Fix dark text bug on mobile drawer */
-    .sidebar-nav a {
-      color: #ffffff !important;
-      text-decoration: none;
-      font-size: 0.95rem;
-      display: block;
-      padding: 8px 0;
-    }
+.hero h1 { font-size: 2.5rem; font-weight: 800; line-height: 1.1; margin-bottom: 1.2rem; max-width: 800px; letter-spacing: -0.02em; }
+.hero h1 span { background: linear-gradient(135deg, var(--cyan-glow), var(--electric-blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 0 30px rgba(0, 229, 255, 0.3); }
+.hero .subtitle { color: var(--text-muted); font-size: 1.1rem; max-width: 580px; margin-bottom: 2rem; font-weight: 400; }
+.hero-buttons { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 2.5rem; }
 
-    .sidebar-nav a:hover {
-      color: var(--accent-blue) !important;
-    }
+.slide-dots { display: flex; gap: 0.6rem; margin-bottom: 2rem; }
+.slide-dots button { width: 30px; height: 4px; border-radius: 2px; border: none; background: rgba(255, 255, 255, 0.2); cursor: pointer; transition: var(--transition); }
+.slide-dots button.active { background: var(--cyan-glow); box-shadow: 0 0 10px var(--cyan-glow); width: 45px; }
 
-    .dropdown-menu {
-      padding-left: 15px;
-    }
+@media (min-width: 768px) { .hero h1 { font-size: 4rem; } }
 
-    .whatsapp-btn {
-      display: block;
-      text-align: center;
-      background: linear-gradient(90deg, #ff5722, #f44336);
-      color: #ffffff !important;
-      font-weight: bold;
-      padding: 12px;
-      border-radius: 8px;
-      margin-top: 20px;
-    }
+.hero-strip { position: relative; z-index: 2; border-top: var(--glass-border); background: var(--glass-bg); backdrop-filter: var(--glass-blur); padding: 1.2rem 0; }
+.hero-strip .container { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1.2rem; }
+.trust-item { display: flex; align-items: center; gap: 0.6rem; color: var(--text-muted); font-size: 0.85rem; font-weight: 500; font-family: 'JetBrains Mono', monospace; }
+.trust-item i { color: var(--cyan-glow); }
 
-    /* SERVICE CARDS & RESPONSIVE IMAGE DIMENSIONS */
-    .services-section {
-      padding: 40px 20px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
+/* Stats Bar */
+.stat-band { padding: 3rem 0; border-bottom: var(--glass-border); position: relative; }
+.stat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+.stat-card { background: var(--bg-card); border: 1px solid var(--border-glow); padding: 1.5rem; border-radius: 12px; backdrop-filter: var(--glass-blur); text-align: center; transition: var(--transition); }
+.stat-card:hover { border-color: var(--cyan-glow); transform: translateY(-4px); box-shadow: var(--shadow-glow); }
+.stat-num { font-family: 'JetBrains Mono', monospace; font-weight: 800; font-size: 2.2rem; background: linear-gradient(135deg, #fff, var(--cyan-glow)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.stat-lbl { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 0.3rem; }
+@media (min-width: 768px) { .stat-grid { grid-template-columns: repeat(4, 1fr); } }
 
-    .services-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 20px;
-    }
+/* Section Header */
+.section-label { text-align: center; max-width: 650px; margin: 0 auto 3.5rem; }
+.section-label .kicker { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--cyan-glow); font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 0.8rem; }
+.section-label h2 { font-size: 2.2rem; font-weight: 800; color: #fff; letter-spacing: -0.02em; }
+.section-label p { color: var(--text-muted); font-size: 0.95rem; margin-top: 0.8rem; }
 
-    @media (min-width: 768px) {
-      .services-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
+/* Bento Grid Services */
+.services { padding: 6rem 0; }
+.bento-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
+@media (min-width: 640px) { .bento-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { 
+  .bento-grid { grid-template-columns: repeat(3, 1fr); } 
+  .svc-card.featured { grid-column: span 2; }
+}
 
-    @media (min-width: 1024px) {
-      .services-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
+.svc-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-glow);
+  border-radius: 16px;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  transition: var(--transition);
+  backdrop-filter: var(--glass-blur);
+  position: relative;
+}
+.svc-card:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--border-glow-active);
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-glow);
+}
+.svc-photo { position: relative; height: 180px; overflow: hidden; }
+.svc-photo img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.7) contrast(1.1); transition: var(--transition); }
+.svc-card:hover .svc-photo img { transform: scale(1.08); filter: brightness(0.9); }
+.svc-fallback-icon { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(13, 22, 41, 0.9); color: var(--cyan-glow); font-size: 2.8rem; }
 
-    .service-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: 14px;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-    }
+.svc-body { padding: 1.5rem; flex: 1; display: flex; flex-direction: column; }
+.svc-body h3 { font-size: 1.15rem; font-weight: 700; color: #fff; margin-bottom: 0.6rem; display: flex; align-items: center; justify-content: space-between; }
+.svc-body p { color: var(--text-muted); font-size: 0.88rem; margin-bottom: 1.2rem; flex: 1; }
+.svc-link { color: var(--cyan-glow); font-weight: 700; font-size: 0.8rem; letter-spacing: 0.05em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 0.5rem; font-family: 'JetBrains Mono', monospace; }
 
-    /* Responsive heights: 180px for mobile, 220px for larger screens */
-    .service-image-wrapper {
-      width: 100%;
-      height: 180px;
-      overflow: hidden;
-    }
+/* Toolkit (Glass Cards) */
+.toolkit { padding: 5rem 0; position: relative; }
+.toolkit-list { display: grid; grid-template-columns: 1fr; gap: 1rem; max-width: 960px; margin: 0 auto; }
+@media (min-width: 768px) { .toolkit-list { grid-template-columns: repeat(2, 1fr); } }
 
-    @media (min-width: 1024px) {
-      .service-image-wrapper {
-        height: 220px;
-      }
-    }
+.toolkit-item { background: var(--bg-card); border: 1px solid var(--border-glow); border-radius: 12px; overflow: hidden; backdrop-filter: var(--glass-blur); transition: var(--transition); }
+.toolkit-head { display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 1.5rem; cursor: pointer; }
+.toolkit-head .th-left { display: flex; align-items: center; gap: 1rem; }
+.toolkit-head i.tk-icon { width: 40px; height: 40px; background: rgba(0, 229, 255, 0.08); border-radius: 8px; border: 1px solid var(--border-glow); display: flex; align-items: center; justify-content: center; color: var(--cyan-glow); font-size: 1.1rem; }
+.toolkit-head h4 { font-size: 0.95rem; font-weight: 700; color: #fff; }
+.toolkit-head .plus { color: var(--cyan-glow); transition: var(--transition); }
+.toolkit-item.active .plus { transform: rotate(135deg); color: var(--neon-orange); }
+.toolkit-body { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+.toolkit-item.active .toolkit-body { max-height: 180px; }
+.toolkit-body-inner { padding: 0 1.5rem 1.2rem 4.2rem; }
+.toolkit-body-inner p { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 0.8rem; }
+.toolkit-body-inner a { color: var(--cyan-glow); font-weight: 700; font-size: 0.82rem; text-decoration: none; font-family: 'JetBrains Mono', monospace; }
 
-    .service-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.3s ease;
-    }
+/* Testimonials */
+.testimonials { padding: 6rem 0; }
+.testimonials-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
+@media (min-width: 768px) { .testimonials-grid { grid-template-columns: repeat(2, 1fr); } }
+.t-card { background: var(--bg-card); border: 1px solid var(--border-glow); padding: 1.8rem; border-radius: 16px; backdrop-filter: var(--glass-blur); position: relative; }
+.t-card .quote-icon { color: var(--cyan-glow); font-size: 1.5rem; margin-bottom: 1rem; opacity: 0.6; }
+.t-text { color: var(--text-main); margin-bottom: 1.5rem; font-size: 0.95rem; line-height: 1.7; }
+.t-author { display: flex; align-items: center; gap: 1rem; }
+.t-avatar { width: 46px; height: 46px; border-radius: 50%; object-fit: cover; border: 1px solid var(--cyan-glow); }
+.t-avatar-fallback { width: 46px; height: 46px; border-radius: 50%; background: linear-gradient(135deg, var(--electric-blue), var(--cyan-glow)); color: #000; font-weight: 800; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; }
+.t-info h4 { font-size: 0.95rem; font-weight: 700; color: #fff; }
+.t-info p { font-size: 0.78rem; color: var(--text-muted); }
 
-    .service-card:hover .service-img {
-      transform: scale(1.05);
-    }
+/* CTA Box */
+.cta { padding: 5rem 0; }
+.cta-box { background: linear-gradient(135deg, rgba(13, 22, 41, 0.9), rgba(5, 8, 17, 0.95)); border: 1px solid var(--border-glow-active); border-radius: 24px; padding: 3.5rem 2rem; text-align: center; position: relative; overflow: hidden; box-shadow: var(--shadow-glow); }
+.cta-box h2 { font-size: 2rem; color: #fff; margin-bottom: 0.8rem; }
+.cta-box p { color: var(--text-muted); max-width: 520px; margin: 0 auto 2rem; font-size: 0.98rem; }
+.cta-box .btn-group { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
 
-    .service-card-body {
-      padding: 20px;
-      position: relative;
-    }
+/* Footer */
+footer { background: #02040a; border-top: var(--glass-border); color: var(--text-muted); padding: 4rem 0 2rem; font-size: 0.88rem; }
+.footer-content { display: grid; grid-template-columns: 1fr; gap: 2.5rem; }
+@media (min-width: 768px) { .footer-content { grid-template-columns: repeat(4, 1fr); } }
+.footer-section h3 { color: #fff; font-size: 1rem; font-weight: 700; margin-bottom: 1.2rem; letter-spacing: 0.02em; }
+.footer-section ul { list-style: none; }
+.footer-section ul li { margin-bottom: 0.6rem; }
+.footer-section a { color: var(--text-muted); text-decoration: none; transition: var(--transition); display: inline-flex; align-items: center; gap: 0.6rem; }
+.footer-section a:hover { color: var(--cyan-glow); }
+.footer-section a i { color: var(--cyan-glow); font-size: 0.8rem; }
 
-    .service-card-body h3 {
-      margin: 0 0 10px 0;
-      font-size: 1.2rem;
-    }
+.social-icons { display: flex; gap: 0.8rem; margin-top: 1.2rem; }
+.social-icons a { width: 38px; height: 38px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--text-main); }
+.social-icons a:hover { background: var(--cyan-glow); color: #000; border-color: var(--cyan-glow); box-shadow: 0 0 15px var(--cyan-glow); }
 
-    .service-card-body p {
-      color: var(--text-muted);
-      font-size: 0.9rem;
-      line-height: 1.5;
-      margin: 0;
-    }
+.footer-bottom { text-align: center; padding-top: 2rem; margin-top: 3rem; border-top: 1px solid rgba(255,255,255,0.05); font-size: 0.8rem; color: rgba(255,255,255,0.4); }
 
-    .service-link {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      color: var(--accent-blue);
-      text-decoration: none;
-      font-size: 1.2rem;
-    }
-
-    /* FOOTER WITH (+) MOBILE ACCORDION LOGIC */
-    .site-footer {
-      background: var(--bg-dark);
-      border-top: 1px solid var(--border-color);
-      padding: 30px 20px;
-    }
-
-    .footer-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    @media (min-width: 768px) {
-      .footer-grid {
-        flex-direction: row;
-        justify-content: space-between;
-      }
-
-      .footer-links-list {
-        display: block !important;
-      }
-
-      .footer-accordion-btn {
-        display: none;
-      }
-    }
-
-    .footer-heading-toggle {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid var(--border-color);
-      padding-bottom: 10px;
-      cursor: pointer;
-    }
-
-    @media (min-width: 768px) {
-      .footer-heading-toggle {
-        border-bottom: none;
-        padding-bottom: 0;
-        cursor: default;
-      }
-    }
-
-    .footer-heading-toggle h4 {
-      margin: 0;
-      font-size: 1.1rem;
-    }
-
-    .footer-accordion-btn {
-      background: none;
-      border: none;
-      color: var(--accent-blue);
-      font-size: 1.5rem;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .footer-links-list {
-      display: none;
-      list-style: none;
-      padding: 10px 0 0 0;
-      margin: 0;
-    }
-
-    .footer-links-list.active {
-      display: block;
-    }
-
-    .footer-links-list li {
-      margin-bottom: 8px;
-    }
-
-    .footer-links-list a {
-      color: var(--text-muted);
-      text-decoration: none;
-      font-size: 0.9rem;
-    }
-
-    .footer-links-list a:hover {
-      color: var(--accent-blue);
-    }
-  </style>
+/* Floating WhatsApp Button */
+.wa-float { position: fixed; bottom: 24px; right: 24px; width: 56px; height: 56px; background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 20px rgba(37, 211, 102, 0.4); z-index: 900; text-decoration: none; transition: var(--transition); }
+.wa-float:hover { transform: scale(1.1); box-shadow: 0 0 30px rgba(37, 211, 102, 0.7); }
+.wa-float i { color: #fff; font-size: 1.6rem; }
+</style>
 </head>
 <body>
 
-  <!-- HEADER NAVBAR -->
-  <header class="site-header">
-    <div class="nav-container">
-      <button class="hamburger-btn" id="menuToggle" aria-label="Toggle Navigation">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
+<!-- Header -->
+<header id="siteHeader">
+  <div class="header-utility">
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+    <a href="index.html">
+      <img src="images/logo.png" alt="Jaynite Digital Solutions" class="logo-icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <span class="logo-mark" style="display:none"><i class="fas fa-bolt"></i></span>
+    </a>
+  </div>
 
-      <a href="index.html" class="header-logo-link">
-        <img src="assets/images/logo.png" alt="Jaynite Digital Logo" class="brand-logo" />
-      </a>
-    </div>
-  </header>
-
-  <!-- MOBILE SIDEBAR NAVIGATION DRAWER -->
-  <aside class="sidebar-menu" id="sidebarMenu">
-    <div class="sidebar-header">
-      <a href="index.html" class="sidebar-logo-link">
-        <img src="assets/images/logo.png" alt="Jaynite Digital Logo" class="brand-logo sidebar-brand-logo" />
-      </a>
-      <span class="sidebar-brand-title">Jaynite Digital</span>
-      <button class="close-btn" id="menuClose" aria-label="Close Menu">&times;</button>
-    </div>
-
-    <nav class="sidebar-nav">
+  <div class="container header-desktop">
+    <a href="index.html" class="brand-lockup">
+      <img src="images/logo.png" alt="Jaynite Digital Solutions" class="logo-icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <span class="logo-mark" style="display:none"><i class="fas fa-bolt"></i></span>
+      <span>Jaynite Digital</span>
+    </a>
+    <nav class="nav-desktop">
       <ul>
-        <li><a href="#home">Home</a></li>
+        <li><a href="index.html" class="active">Home</a></li>
         <li class="has-dropdown">
-          <a href="#services">Services <span class="arrow">&#9662;</span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#web-dev">&#128187; Web & App Development</a></li>
-            <li><a href="#uiux">&#128396; UI/UX Design</a></li>
-            <li><a href="#cybersecurity">&#128737; Cybersecurity</a></li>
-            <li><a href="#cloud">&#9729; Cloud Computing</a></li>
-            <li><a href="#marketing">&#128227; Digital Marketing</a></li>
-            <li><a href="#printing">&#128438; Printing, Flyers & Banners</a></li>
-            <li><a href="#accessories">&#128187; Computers & IT Accessories</a></li>
-            <li><a href="#tutoring">&#127891; Home & Online Tutoring</a></li>
-            <li><a href="#bundles">&#128241; Buy Data Bundles</a></li>
-            <li><a href="#checkers">&#127891; Results Checkers</a></li>
-          </ul>
+          <a href="services.html">Services <i class="fas fa-chevron-down caret"></i></a>
+          <div class="dropdown">
+            <a href="services.html#web"><i class="fas fa-laptop-code"></i> Web &amp; App Development</a>
+            <a href="services.html#uiux"><i class="fas fa-pen-nib"></i> UI/UX Design</a>
+            <a href="services.html#security"><i class="fas fa-shield-alt"></i> Cybersecurity</a>
+            <a href="services.html#cloud"><i class="fas fa-cloud"></i> Cloud Computing</a>
+            <a href="services.html#marketing"><i class="fas fa-bullhorn"></i> Digital Marketing</a>
+            <div class="dropdown-divider"></div>
+            <a href="services.html#printing"><i class="fas fa-print"></i> Printing, Flyers &amp; Banners</a>
+            <a href="services.html#computers"><i class="fas fa-desktop"></i> Computers &amp; IT Accessories</a>
+            <a href="services.html#tutoring"><i class="fas fa-chalkboard-teacher"></i> Home &amp; Online Tutoring</a>
+            <div class="dropdown-divider"></div>
+            <a href="https://www.cheapdata.shop/shop/primedata-jaynite-digital-solutions-mkfmqvnc" target="_blank" rel="noopener"><i class="fas fa-sim-card"></i> Buy Data Bundles ↗</a>
+            <a href="services.html#checkers"><i class="fas fa-graduation-cap"></i> Results Checkers</a>
+          </div>
         </li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#portfolio">Portfolio</a></li>
-        <li><a href="#blog">Blog</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="portfolio.html">Portfolio</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="contact.html">Contact</a></li>
       </ul>
-      <a href="https://wa.me/yournumber" class="whatsapp-btn">CHAT ON WHATSAPP</a>
     </nav>
-  </aside>
+    <a href="https://wa.me/233201485621" target="_blank" rel="noopener" class="btn btn-orange"><i class="fab fa-whatsapp"></i> Chat on WhatsApp</a>
+  </div>
+</header>
 
-  <!-- SERVICES SECTION WITH REAL PICTURES -->
-  <section class="services-section" id="services">
-    <h2>Our Services</h2>
-    <div class="services-grid">
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mm-top">
+    <img src="images/logo.png" alt="Jaynite Digital Solutions" style="width:36px;height:36px;object-fit:cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+    <span class="logo-mark" style="display:none;width:36px;height:36px"><i class="fas fa-bolt"></i></span>
+    <button class="mm-close" id="mmClose" aria-label="Close menu">&times;</button>
+  </div>
+  <div class="mm-body">
+    <ul class="mm-list">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li>
+        <button class="mm-toggle" id="mmServicesToggle">
+          Services <i class="fas fa-chevron-down caret"></i>
+        </button>
+        <ul class="mm-submenu" id="mmServicesSubmenu">
+          <li><a href="services.html#web"><i class="fas fa-laptop-code"></i> Web &amp; App Development</a></li>
+          <li><a href="services.html#uiux"><i class="fas fa-pen-nib"></i> UI/UX Design</a></li>
+          <li><a href="services.html#security"><i class="fas fa-shield-alt"></i> Cybersecurity</a></li>
+          <li><a href="services.html#cloud"><i class="fas fa-cloud"></i> Cloud Computing</a></li>
+          <li><a href="services.html#marketing"><i class="fas fa-bullhorn"></i> Digital Marketing</a></li>
+          <li><a href="services.html#printing"><i class="fas fa-print"></i> Printing &amp; Publications</a></li>
+          <li><a href="services.html#computers"><i class="fas fa-desktop"></i> Computers &amp; Accessories</a></li>
+          <li><a href="services.html#tutoring"><i class="fas fa-chalkboard-teacher"></i> Tutoring</a></li>
+          <li><a href="https://www.cheapdata.shop/shop/primedata-jaynite-digital-solutions-mkfmqvnc" target="_blank" rel="noopener"><i class="fas fa-sim-card"></i> Buy Data Bundles</a></li>
+          <li><a href="services.html#checkers"><i class="fas fa-graduation-cap"></i> Results Checkers</a></li>
+        </ul>
+      </li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="portfolio.html">Portfolio</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </div>
+  <a href="https://wa.me/233201485621" target="_blank" rel="noopener" class="btn btn-orange" style="margin:20px; text-align:center; justify-content:center"><i class="fab fa-whatsapp"></i> Chat on WhatsApp</a>
+</div>
 
-      <!-- Web & App Development -->
-      <div class="service-card">
-        <div class="service-image-wrapper">
-          <img src="assets/images/services/web-app-dev.jpg" alt="Web & App Development" class="service-img" />
+<!-- Hero Section -->
+<section class="hero" id="home">
+  <div class="hero-bg-layer" id="heroBgLayer">
+    <div class="hero-bg-slide active" data-bg="0" style="background-image:url('images/hero-1.jpg')"></div>
+    <div class="hero-bg-slide" data-bg="1" style="background-image:url('images/hero-2.jpg')"></div>
+    <div class="hero-bg-slide" data-bg="2" style="background-image:url('images/hero-3.jpg')"></div>
+    <div class="hero-scrim"></div>
+  </div>
+
+  <div class="hero-content">
+    <div class="container">
+      <div class="slide active" data-slide="0">
+        <span class="tech-badge">Web &amp; App Engineering</span>
+        <h1>Empowering <span>Digital Innovation</span> Across Ghana</h1>
+        <p class="subtitle">Next-generation websites, scalable mobile apps, UI/UX systems, and enterprise cybersecurity built to scale your business online.</p>
+      </div>
+      <div class="slide" data-slide="1">
+        <span class="tech-badge">Print &amp; Digital Media</span>
+        <h1>Print, Publish &amp; <span>Deliver</span> Anywhere</h1>
+        <p class="subtitle">High-impact flyers, banners, custom apparel, frames, and commercial publication printing with nationwide delivery.</p>
+      </div>
+      <div class="slide" data-slide="2">
+        <span class="tech-badge">Utility &amp; EdTech Hub</span>
+        <h1>Data, Devices &amp; <span>Learning Solutions</span></h1>
+        <p class="subtitle">Instant data bundle top-ups, IT hardware procurement, specialized academic tutoring, and online result checkers.</p>
+      </div>
+
+      <div class="hero-buttons">
+        <a href="services.html" class="btn btn-cyan"><i class="fas fa-terminal"></i> Explore Services</a>
+        <a href="https://wa.me/233201485621" target="_blank" rel="noopener" class="btn btn-outline"><i class="fab fa-whatsapp"></i> Talk to Us</a>
+      </div>
+
+      <div class="slide-dots" id="slideDots">
+        <button class="active" data-goto="0" aria-label="Slide 1"></button>
+        <button data-goto="1" aria-label="Slide 2"></button>
+        <button data-goto="2" aria-label="Slide 3"></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-strip">
+    <div class="container">
+      <div class="trust-item"><i class="fas fa-location-dot"></i> Sunyani, Bono Region</div>
+      <div class="trust-item"><i class="fas fa-truck-fast"></i> Walk-in &amp; Nationwide Delivery</div>
+      <div class="trust-item"><i class="fas fa-shield-halved"></i> 100% Secure Digital Infrastructure</div>
+    </div>
+  </div>
+</section>
+
+<!-- Stats Bar -->
+<section class="stat-band">
+  <div class="container stat-grid">
+    <div class="stat-card">
+      <div class="stat-num">200+</div>
+      <div class="stat-lbl">Projects Delivered</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">500+</div>
+      <div class="stat-lbl">Active Clients</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">5+</div>
+      <div class="stat-lbl">Years Industry Experience</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">24/7</div>
+      <div class="stat-lbl">Technical Support</div>
+    </div>
+  </div>
+</section>
+
+<!-- Bento Grid Services -->
+<section class="services" id="services">
+  <div class="container">
+    <div class="section-label">
+      <span class="kicker">// Our Expertise</span>
+      <h2>Core Digital Capabilities</h2>
+      <p>Custom technology stack and store-front solutions combined into a seamless platform.</p>
+    </div>
+    
+    <div class="bento-grid">
+      <!-- Card 1: Web (Featured) -->
+      <a href="services.html#web" class="svc-card featured">
+        <div class="svc-photo">
+          <img src="images/service-web.jpg" alt="Web and app development" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="svc-fallback-icon" style="display:none"><i class="fas fa-laptop-code"></i></div>
         </div>
-        <div class="service-card-body">
-          <h3>Web & App Development</h3>
+        <div class="svc-body">
+          <h3>Web &amp; App Development <i class="fas fa-arrow-up-right-from-square" style="font-size:0.8rem; color:var(--cyan-glow)"></i></h3>
           <p>Modern, high-performance responsive web applications, progressive web apps (PWAs), and software built with high scalability.</p>
-          <a href="#web-dev" class="service-link">&#8599;</a>
+          <span class="svc-link">Learn More <i class="fas fa-arrow-right"></i></span>
         </div>
-      </div>
+      </a>
 
-      <!-- UI/UX Design -->
-      <div class="service-card">
-        <div class="service-image-wrapper">
-          <img src="assets/images/services/ui-ux-design.jpg" alt="UI/UX Design" class="service-img" />
+      <!-- Card 2: UI/UX -->
+      <a href="services.html#uiux" class="svc-card">
+        <div class="svc-photo">
+          <img src="images/service-uiux.jpg" alt="UI and UX design" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="svc-fallback-icon" style="display:none"><i class="fas fa-pen-nib"></i></div>
         </div>
-        <div class="service-card-body">
+        <div class="svc-body">
           <h3>UI/UX Design</h3>
-          <p>Intuitive user interfaces and user-centered design systems crafted for seamless mobile and desktop experiences.</p>
-          <a href="#uiux" class="service-link">&#8599;</a>
+          <p>Intuitive user interfaces and user journey mapping focused on conversions.</p>
+          <span class="svc-link">Learn More <i class="fas fa-arrow-right"></i></span>
         </div>
-      </div>
+      </a>
 
-      <!-- Cybersecurity -->
-      <div class="service-card">
-        <div class="service-image-wrapper">
-          <img src="assets/images/services/cybersecurity.jpg" alt="Cybersecurity" class="service-img" />
+      <!-- Card 3: Cybersecurity -->
+      <a href="services.html#security" class="svc-card">
+        <div class="svc-photo">
+          <img src="images/service-security.jpg" alt="Cybersecurity" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="svc-fallback-icon" style="display:none"><i class="fas fa-shield-alt"></i></div>
         </div>
-        <div class="service-card-body">
+        <div class="svc-body">
           <h3>Cybersecurity</h3>
-          <p>Enterprise-grade threat prevention, infrastructure auditing, and data security solutions for growing platforms.</p>
-          <a href="#cybersecurity" class="service-link">&#8599;</a>
+          <p>Proactive security audits, threat assessments, and data protection implementation.</p>
+          <span class="svc-link">Learn More <i class="fas fa-arrow-right"></i></span>
         </div>
-      </div>
+      </a>
 
+      <!-- Card 4: Cloud -->
+      <a href="services.html#cloud" class="svc-card">
+        <div class="svc-photo">
+          <img src="images/service-cloud.jpg" alt="Cloud computing" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="svc-fallback-icon" style="display:none"><i class="fas fa-cloud"></i></div>
+        </div>
+        <div class="svc-body">
+          <h3>Cloud Computing</h3>
+          <p>AWS/Firebase cloud deployment, architecture migration, and automated backups.</p>
+          <span class="svc-link">Learn More <i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+
+      <!-- Card 5: Printing -->
+      <a href="services.html#printing" class="svc-card">
+        <div class="svc-photo">
+          <img src="images/service-printing.jpg" alt="Printing and publications" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="svc-fallback-icon" style="display:none"><i class="fas fa-print"></i></div>
+        </div>
+        <div class="svc-body">
+          <h3>Printing &amp; Publications</h3>
+          <p>Flyers, vinyl banners, custom t-shirts, frames, and high-speed photocopying.</p>
+          <span class="svc-link">Learn More <i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+
+      <!-- Card 6: Computers -->
+      <a href="services.html#computers" class="svc-card">
+        <div class="svc-photo">
+          <img src="images/service-computers.jpg" alt="Computers and IT accessories" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="svc-fallback-icon" style="display:none"><i class="fas fa-desktop"></i></div>
+        </div>
+        <div class="svc-body">
+          <h3>Computers &amp; Accessories</h3>
+          <p>Laptops, desktops, and original IT peripherals for workstations and study.</p>
+          <span class="svc-link">Learn More <i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- FOOTER WITH ACCORDION (+) ON MOBILE -->
-  <footer class="site-footer">
-    <div class="footer-grid">
-
-      <div class="footer-column">
-        <div class="footer-heading-toggle">
-          <h4>Services</h4>
-          <button class="footer-accordion-btn" aria-label="Toggle Section">+</button>
-        </div>
-        <ul class="footer-links-list">
-          <li><a href="#web-dev">Web & App Development</a></li>
-          <li><a href="#uiux">UI/UX Design</a></li>
-          <li><a href="#cybersecurity">Cybersecurity</a></li>
-          <li><a href="#cloud">Cloud Computing</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-column">
-        <div class="footer-heading-toggle">
-          <h4>Quick Links</h4>
-          <button class="footer-accordion-btn" aria-label="Toggle Section">+</button>
-        </div>
-        <ul class="footer-links-list">
-          <li><a href="#about">About Us</a></li>
-          <li><a href="#portfolio">Portfolio</a></li>
-          <li><a href="#blog">Blog Posts</a></li>
-          <li><a href="#contact">Contact Us</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-column">
-        <div class="footer-heading-toggle">
-          <h4>Support & Products</h4>
-          <button class="footer-accordion-btn" aria-label="Toggle Section">+</button>
-        </div>
-        <ul class="footer-links-list">
-          <li><a href="#bundles">Buy Data Bundles</a></li>
-          <li><a href="#checkers">Results Checkers</a></li>
-          <li><a href="#accessories">IT Accessories</a></li>
-          <li><a href="#tutoring">Online Tutoring</a></li>
-        </ul>
-      </div>
-
+<!-- Toolkit Section -->
+<section class="toolkit" id="toolkit">
+  <div class="container">
+    <div class="section-label">
+      <span class="kicker">// Utilities &amp; Workflows</span>
+      <h2>Handy Tools We Recommend</h2>
+      <p>Instant online tools to streamline everyday file conversions and visual workflows.</p>
     </div>
-  </footer>
+    <div class="toolkit-list">
+      <div class="toolkit-item">
+        <div class="toolkit-head"><div class="th-left"><i class="fas fa-file-word tk-icon"></i><h4>Convert PDF to Word</h4></div><span class="plus"><i class="fas fa-plus"></i></span></div>
+        <div class="toolkit-body"><div class="toolkit-body-inner"><p>Convert complex PDF documents into editable Word files instantly.</p><a href="https://www.ilovepdf.com/pdf_to_word" target="_blank" rel="noopener">Open iLovePDF →</a></div></div>
+      </div>
+      <div class="toolkit-item">
+        <div class="toolkit-head"><div class="th-left"><i class="fas fa-eraser tk-icon"></i><h4>Remove Image Background</h4></div><span class="plus"><i class="fas fa-plus"></i></span></div>
+        <div class="toolkit-body"><div class="toolkit-body-inner"><p>AI-driven background removal for clean product photos and portrait cutouts.</p><a href="https://www.remove.bg/" target="_blank" rel="noopener">Open remove.bg →</a></div></div>
+      </div>
+      <div class="toolkit-item">
+        <div class="toolkit-head"><div class="th-left"><i class="fas fa-robot tk-icon"></i><h4>Ask AI Assistant</h4></div><span class="plus"><i class="fas fa-plus"></i></span></div>
+        <div class="toolkit-body"><div class="toolkit-body-inner"><p>Leverage Claude for advanced copywriting, brainstorming, and code analysis.</p><a href="https://claude.ai" target="_blank" rel="noopener">Open Claude AI →</a></div></div>
+      </div>
+      <div class="toolkit-item">
+        <div class="toolkit-head"><div class="th-left"><i class="fas fa-compress tk-icon"></i><h4>Compress Files &amp; Media</h4></div><span class="plus"><i class="fas fa-plus"></i></span></div>
+        <div class="toolkit-body"><div class="toolkit-body-inner"><p>Reduce PDF and image payload sizes without quality degradation.</p><a href="https://www.ilovepdf.com/compress_pdf" target="_blank" rel="noopener">Open iLovePDF Compress →</a></div></div>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <!-- INTERACTIVE JAVASCRIPT -->
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
+<!-- Testimonials -->
+<section class="testimonials" id="testimonials">
+  <div class="container">
+    <div class="section-label">
+      <span class="kicker">// Verified Reviews</span>
+      <h2>Client Endorsements</h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="t-card">
+        <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+        <p class="t-text">Jaynite Digital Solutions transformed our culinary brand with their exceptional web development services. The speed, user experience, and modern aesthetics exceeded our expectations.</p>
+        <div class="t-author">
+          <img src="images/louisa.jpg" alt="Louisa Boateng" class="t-avatar" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="t-avatar-fallback" style="display:none">LB</div>
+          <div class="t-info"><h4>Louisa Boateng</h4><p>Co-Founder, LOUEL Cuisine</p></div>
+        </div>
+      </div>
+      <div class="t-card">
+        <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+        <p class="t-text">Outstanding cybersecurity solutions and technical advice. Their proactive protection and risk assessments gave our estate platform total peace of mind.</p>
+        <div class="t-author">
+          <img src="images/loveson.jpg" alt="Kpausah Loveson Snr" class="t-avatar" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="t-avatar-fallback" style="display:none">KL</div>
+          <div class="t-info"><h4>Kpausah Loveson Snr</h4><p>CEO, Destin Estate Ghana</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-      // Sidebar drawer controls
-      const menuToggle = document.getElementById('menuToggle');
-      const menuClose = document.getElementById('menuClose');
-      const sidebarMenu = document.getElementById('sidebarMenu');
+<!-- Call to Action -->
+<section class="cta">
+  <div class="container">
+    <div class="cta-box">
+      <h2>Ready to Upgrade Your Digital Footprint?</h2>
+      <p>Whether you require a custom web platform, branding material, data top-up, or enterprise IT hardware, we are ready to assist.</p>
+      <div class="btn-group">
+        <a href="https://wa.me/233201485621" target="_blank" rel="noopener" class="btn btn-orange"><i class="fab fa-whatsapp"></i> Chat on WhatsApp</a>
+        <a href="contact.html" class="btn btn-outline"><i class="fas fa-envelope"></i> Contact Us</a>
+      </div>
+    </div>
+  </div>
+</section>
 
-      if (menuToggle && sidebarMenu) {
-        menuToggle.addEventListener('click', () => {
-          sidebarMenu.classList.add('active');
-        });
-      }
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Jaynite Digital</h3>
+        <p style="margin-bottom: 1rem; color: var(--text-muted);">Empowering digital innovation in Ghana with cutting-edge web design, publication media, and IT support services.</p>
+        <div class="social-icons">
+          <a href="https://youtube.com/@skillsavvygh?si=VHCLWgZXM1sQSvXE" aria-label="YouTube" target="_blank"><i class="fab fa-youtube"></i></a>
+          <a href="https://www.linkedin.com/in/akomani-emmanuel-282943370" aria-label="LinkedIn" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://wa.me/233201485621" aria-label="WhatsApp" target="_blank"><i class="fab fa-whatsapp"></i></a>
+          <a href="https://www.instagram.com/jaynite_official" aria-label="Instagram" target="_blank"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="index.html"><i class="fas fa-angle-right"></i> Home</a></li>
+          <li><a href="services.html"><i class="fas fa-angle-right"></i> Services</a></li>
+          <li><a href="about.html"><i class="fas fa-angle-right"></i> About</a></li>
+          <li><a href="#testimonials"><i class="fas fa-angle-right"></i> Testimonials</a></li>
+          <li><a href="#toolkit"><i class="fas fa-angle-right"></i> Free Tools</a></li>
+          <li><a href="contact.html"><i class="fas fa-angle-right"></i> Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Services</h3>
+        <ul>
+          <li><a href="services.html#web"><i class="fas fa-angle-right"></i> Web &amp; App Development</a></li>
+          <li><a href="services.html#printing"><i class="fas fa-angle-right"></i> Printing &amp; Publications</a></li>
+          <li><a href="services.html#computers"><i class="fas fa-angle-right"></i> Computers &amp; Accessories</a></li>
+          <li><a href="services.html#tutoring"><i class="fas fa-angle-right"></i> Tutoring Services</a></li>
+          <li><a href="https://www.cheapdata.shop/shop/primedata-jaynite-digital-solutions-mkfmqvnc" target="_blank" rel="noopener"><i class="fas fa-angle-right"></i> Buy Data Bundles</a></li>
+          <li><a href="services.html#checkers"><i class="fas fa-angle-right"></i> Results Checkers</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Contact Info</h3>
+        <ul>
+          <li><a href="#"><i class="fas fa-location-dot"></i> Sunyani, Bono Region, Ghana</a></li>
+          <li><a href="https://wa.me/233201485621" target="_blank"><i class="fab fa-whatsapp"></i> +233 20 148 5621</a></li>
+          <li><a href="mailto:jaynitedigital@gmail.com"><i class="fas fa-envelope"></i> jaynitedigital@gmail.com</a></li>
+          <li><a href="https://jaynitedigital.me"><i class="fas fa-globe"></i> jaynitedigital.me</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Jaynite Digital Solutions. Engineered with High-Tech Aesthetics.</p>
+    </div>
+  </div>
+</footer>
 
-      if (menuClose && sidebarMenu) {
-        menuClose.addEventListener('click', () => {
-          sidebarMenu.classList.remove('active');
-        });
-      }
+<a href="https://wa.me/233201485621" target="_blank" rel="noopener" class="wa-float" aria-label="Chat on WhatsApp"><i class="fab fa-whatsapp"></i></a>
 
-      // Mobile footer (+) accordion behavior
-      const footerToggles = document.querySelectorAll('.footer-heading-toggle');
+<script>
+// Mobile menu toggle
+const menuToggle = document.getElementById('menuToggle');
+const mobileMenu = document.getElementById('mobileMenu');
+const mmClose = document.getElementById('mmClose');
 
-      footerToggles.forEach(toggle => {
-        toggle.addEventListener('click', () => {
-          if (window.innerWidth < 768) {
-            const parent = toggle.parentElement;
-            const list = parent.querySelector('.footer-links-list');
-            const btn = parent.querySelector('.footer-accordion-btn');
+function openMenu(){ mobileMenu.classList.add('active'); document.body.style.overflow='hidden'; }
+function closeMenu(){ mobileMenu.classList.remove('active'); document.body.style.overflow='auto'; }
 
-            if (list) {
-              list.classList.toggle('active');
-              const isOpen = list.classList.contains('active');
-              if (btn) {
-                btn.textContent = isOpen ? '−' : '+';
-              }
-            }
-          }
-        });
-      });
+menuToggle.addEventListener('click', openMenu);
+mmClose.addEventListener('click', closeMenu);
 
-    });
-  </script>
+document.querySelectorAll('.mm-list > li > a, .mm-submenu a').forEach(l=>l.addEventListener('click', closeMenu));
+
+const mmToggle = document.getElementById('mmServicesToggle');
+const mmSubmenu = document.getElementById('mmServicesSubmenu');
+mmToggle.addEventListener('click', ()=>{
+  mmSubmenu.classList.toggle('active');
+});
+
+// Toolkit Accordion
+document.querySelectorAll('.toolkit-head').forEach(h=>{
+  h.addEventListener('click', ()=> h.closest('.toolkit-item').classList.toggle('active'));
+});
+
+// Hero Slideshow
+const slides = document.querySelectorAll('.slide');
+const bgSlides = document.querySelectorAll('.hero-bg-slide');
+const dots = document.querySelectorAll('.slide-dots button');
+let current = 0, timer;
+
+function go(i){
+  slides.forEach(s=>s.classList.remove('active'));
+  bgSlides.forEach(b=>b.classList.remove('active'));
+  dots.forEach(d=>d.classList.remove('active'));
+  
+  slides[i].classList.add('active'); 
+  bgSlides[i].classList.add('active'); 
+  dots[i].classList.add('active');
+  current = i;
+}
+
+function next(){ go((current+1)%slides.length); }
+function start(){ timer = setInterval(next, 5500); }
+function stop(){ clearInterval(timer); }
+
+dots.forEach(d=>d.addEventListener('click', ()=>{ stop(); go(parseInt(d.dataset.goto)); start(); }));
+start();
+</script>
 </body>
 </html>
