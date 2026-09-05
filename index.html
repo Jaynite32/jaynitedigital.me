@@ -349,16 +349,21 @@ header {
 .badge-chip { display: flex; align-items: center; gap: 0.5rem; background: var(--bg-card); border: 1px solid var(--border-glow); padding: 0.6rem 1.1rem; border-radius: 30px; font-size: 0.8rem; font-weight: 600; color: var(--text-muted); transition: var(--transition); }
 .badge-chip:hover { border-color: var(--cyan-glow); color: var(--cyan-glow); transform: translateY(-3px); box-shadow: var(--shadow-glow); }
 .badge-chip i { color: var(--cyan-glow); font-size: 0.75rem; }
+.badge-logo { height: 20px; width: auto; max-width: 68px; object-fit: contain; border-radius: 3px; }
 .institutions-note { text-align: center; max-width: 700px; margin: 0 auto 3rem; color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; }
 .institutions-note strong { color: #fff; }
 
 .credibility-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; max-width: 960px; margin: 0 auto; }
 @media (min-width: 768px) { .credibility-grid { grid-template-columns: repeat(4, 1fr); } }
-.cred-card { background: var(--bg-card); border: 1px solid var(--border-glow); border-radius: 14px; padding: 1.5rem 1.2rem; text-align: center; backdrop-filter: var(--glass-blur); transition: var(--transition); }
+.cred-card { background: var(--bg-card); border: 1px solid var(--border-glow); border-radius: 14px; overflow: hidden; backdrop-filter: var(--glass-blur); transition: var(--transition); }
 .cred-card:hover { border-color: var(--cyan-glow); transform: translateY(-4px); box-shadow: var(--shadow-glow); }
-.cred-card i { font-size: 1.6rem; color: var(--cyan-glow); margin-bottom: 0.8rem; display: block; }
-.cred-card h4 { font-size: 0.9rem; font-weight: 700; color: #fff; margin-bottom: 0.4rem; }
-.cred-card p { font-size: 0.78rem; color: var(--text-muted); line-height: 1.4; }
+.cred-photo { position: relative; height: 120px; overflow: hidden; }
+.cred-photo img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.75) contrast(1.05); transition: var(--transition); }
+.cred-card:hover .cred-photo img { transform: scale(1.08); filter: brightness(0.9); }
+.cred-fallback-icon { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(13, 22, 41, 0.9); color: var(--cyan-glow); font-size: 1.8rem; }
+.cred-body { padding: 1.1rem 1rem; text-align: center; }
+.cred-body h4 { font-size: 0.88rem; font-weight: 700; color: #fff; margin-bottom: 0.4rem; }
+.cred-body p { font-size: 0.76rem; color: var(--text-muted); line-height: 1.4; }
 
 /* Payment Options (replaces testimonials) */
 .pay-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; max-width: 960px; margin: 0 auto; }
@@ -368,6 +373,10 @@ header {
 .pay-card i { font-size: 1.8rem; color: var(--cyan-glow); margin-bottom: 1rem; display: block; }
 .pay-card h4 { font-size: 0.95rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; }
 .pay-card p { font-size: 0.78rem; color: var(--text-muted); line-height: 1.5; }
+.pay-logos { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem; margin-bottom: 1rem; }
+.pay-chip { display: inline-flex; align-items: center; justify-content: center; background: #fff; border-radius: 6px; padding: 0.3rem 0.5rem; min-width: 40px; height: 30px; }
+.pay-chip img { height: 18px; width: auto; max-width: 52px; object-fit: contain; display: block; }
+.pay-chip b { color: #0a0e1a; font-size: 0.62rem; font-weight: 800; }
 .pay-secure-note { text-align: center; margin-top: 2.5rem; color: var(--text-muted); font-size: 0.82rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem; }
 .pay-secure-note i { color: var(--cyan-glow); }
 
@@ -676,39 +685,62 @@ footer { background: #02040a; border-top: var(--glass-border); color: var(--text
     </div>
 
     <div class="badge-cloud">
-      <span class="badge-chip"><i class="fas fa-check"></i> SSNIT</span>
-      <span class="badge-chip"><i class="fas fa-check"></i> GRA</span>
-      <span class="badge-chip"><i class="fas fa-check"></i> Ghana.gov</span>
-      <span class="badge-chip"><i class="fas fa-check"></i> Passport Office</span>
-      <span class="badge-chip"><i class="fas fa-check"></i> GhanaEPS</span>
-      <span class="badge-chip"><i class="fas fa-check"></i> PPA</span>
-      <span class="badge-chip"><i class="fas fa-check"></i> NSA</span>
-      <span class="badge-chip"><i class="fas fa-check"></i> WAEC</span>
-      <span class="badge-chip"><i class="fas fa-check"></i> CSSPS</span>
-      <span class="badge-chip"><i class="fas fa-check"></i> NMC</span>
+      <span class="badge-chip"><img src="images/inst-ssnit.png" alt="" class="badge-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';"><i class="fas fa-check" style="display:none"></i> SSNIT</span>
+      <span class="badge-chip"><img src="images/inst-gra.png" alt="" class="badge-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';"><i class="fas fa-check" style="display:none"></i> GRA</span>
+      <span class="badge-chip"><img src="images/inst-ghanagov.png" alt="" class="badge-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';"><i class="fas fa-check" style="display:none"></i> Ghana.gov</span>
+      <span class="badge-chip"><img src="images/inst-passport.png" alt="" class="badge-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';"><i class="fas fa-check" style="display:none"></i> Passport Application</span>
+      <span class="badge-chip"><img src="images/inst-ghanaeps.png" alt="" class="badge-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';"><i class="fas fa-check" style="display:none"></i> GhanaEPS</span>
+      <span class="badge-chip"><img src="images/inst-ppa.png" alt="" class="badge-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';"><i class="fas fa-check" style="display:none"></i> PPA</span>
+      <span class="badge-chip"><img src="images/inst-nsa.png" alt="" class="badge-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';"><i class="fas fa-check" style="display:none"></i> NSA</span>
+      <span class="badge-chip"><img src="images/inst-waec.png" alt="" class="badge-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';"><i class="fas fa-check" style="display:none"></i> WAEC</span>
+      <span class="badge-chip"><img src="images/inst-cssps.png" alt="" class="badge-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';"><i class="fas fa-check" style="display:none"></i> CSSPS</span>
+      <span class="badge-chip"><img src="images/inst-nmc.png" alt="" class="badge-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';"><i class="fas fa-check" style="display:none"></i> NMC</span>
+      <span class="badge-chip"><img src="images/inst-dvla.png" alt="" class="badge-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';"><i class="fas fa-check" style="display:none"></i> DVLA</span>
+      <span class="badge-chip"><img src="images/inst-nia.png" alt="" class="badge-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';"><i class="fas fa-check" style="display:none"></i> Ghana Card (NIA)</span>
+      <span class="badge-chip"><img src="images/inst-rgd.png" alt="" class="badge-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';"><i class="fas fa-check" style="display:none"></i> Business Registration (RGD)</span>
     </div>
     <p class="institutions-note">We also assist with <strong>NMC Registration</strong>, <strong>Nursing Training College forms</strong>, and <strong>University Admission forms</strong> — guiding you through every field so nothing gets rejected for a simple mistake.</p>
 
     <div class="credibility-grid">
       <div class="cred-card">
-        <i class="fas fa-image"></i>
-        <h4>Picture Framing</h4>
-        <p>Custom frames for certificates, portraits &amp; awards.</p>
+        <div class="cred-photo">
+          <img src="images/cred-framing.jpg" alt="Picture framing" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="cred-fallback-icon" style="display:none"><i class="fas fa-image"></i></div>
+        </div>
+        <div class="cred-body">
+          <h4>Picture Framing</h4>
+          <p>Custom frames for certificates, portraits &amp; awards.</p>
+        </div>
       </div>
       <div class="cred-card">
-        <i class="fas fa-images"></i>
-        <h4>Scanning &amp; Digitization</h4>
-        <p>Documents &amp; photos scanned and archived digitally.</p>
+        <div class="cred-photo">
+          <img src="images/cred-scanning.jpg" alt="Scanning and digitization" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="cred-fallback-icon" style="display:none"><i class="fas fa-images"></i></div>
+        </div>
+        <div class="cred-body">
+          <h4>Scanning &amp; Digitization</h4>
+          <p>Documents &amp; photos scanned and archived digitally.</p>
+        </div>
       </div>
       <div class="cred-card">
-        <i class="fas fa-palette"></i>
-        <h4>Graphic Design</h4>
-        <p>Logos, posters, invitations &amp; branded artwork.</p>
+        <div class="cred-photo">
+          <img src="images/cred-graphics.jpg" alt="Graphic design work" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="cred-fallback-icon" style="display:none"><i class="fas fa-palette"></i></div>
+        </div>
+        <div class="cred-body">
+          <h4>Graphic Design</h4>
+          <p>Logos, posters, invitations &amp; branded artwork.</p>
+        </div>
       </div>
       <div class="cred-card">
-        <i class="fas fa-file-signature"></i>
-        <h4>Form Filling Assistance</h4>
-        <p>Guided, error-free completion of official applications.</p>
+        <div class="cred-photo">
+          <img src="images/cred-forms.jpg" alt="Form filling assistance" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="cred-fallback-icon" style="display:none"><i class="fas fa-file-signature"></i></div>
+        </div>
+        <div class="cred-body">
+          <h4>Form Filling Assistance</h4>
+          <p>Guided, error-free completion of official applications.</p>
+        </div>
       </div>
     </div>
   </div>
@@ -745,7 +777,7 @@ footer { background: #02040a; border-top: var(--glass-border); color: var(--text
       </div>
       <div class="toolkit-item">
         <div class="toolkit-head"><div class="th-left"><i class="fas fa-graduation-cap tk-icon"></i><h4>Check WASSCE / BECE Results<span class="tk-own-tag">Our Service</span></h4></div><span class="plus"><i class="fas fa-plus"></i></span></div>
-        <div class="toolkit-body"><div class="toolkit-body-inner"><p>Fast, reliable result-checking assistance for WAEC exams.</p><a href="services.html#checkers">View Results Checkers →</a></div></div>
+        <div class="toolkit-body"><div class="toolkit-body-inner"><p>Fast, reliable result-checking assistance for WAEC exams.</p><a href="https://ghana.waecdirect.org/" target="_blank" rel="noopener">Check Results on WAECDirect →</a></div></div>
       </div>
       <div class="toolkit-item">
         <div class="toolkit-head"><div class="th-left"><i class="fas fa-ticket tk-icon"></i><h4>Buy Result Checker PINs<span class="tk-own-tag">Our Service</span></h4></div><span class="plus"><i class="fas fa-plus"></i></span></div>
@@ -765,7 +797,11 @@ footer { background: #02040a; border-top: var(--glass-border); color: var(--text
     </div>
     <div class="pay-grid">
       <div class="pay-card">
-        <i class="fas fa-mobile-screen-button"></i>
+        <div class="pay-logos">
+          <span class="pay-chip"><img src="images/pay-mtn.png" alt="MTN Mobile Money" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';"><b style="display:none">MTN</b></span>
+          <span class="pay-chip"><img src="images/pay-telecel.png" alt="Telecel Cash" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';"><b style="display:none">Telecel</b></span>
+          <span class="pay-chip"><img src="images/pay-airteltigo.png" alt="AirtelTigo Money" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';"><b style="display:none">AirtelTigo</b></span>
+        </div>
         <h4>Mobile Money</h4>
         <p>MTN MoMo, Telecel Cash &amp; AirtelTigo Money</p>
       </div>
@@ -775,12 +811,17 @@ footer { background: #02040a; border-top: var(--glass-border); color: var(--text
         <p>Direct transfer to our business account</p>
       </div>
       <div class="pay-card">
-        <i class="fas fa-credit-card"></i>
+        <div class="pay-logos">
+          <span class="pay-chip"><img src="images/pay-visa.png" alt="Visa" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';"><b style="display:none">Visa</b></span>
+          <span class="pay-chip"><img src="images/pay-mastercard.png" alt="Mastercard" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';"><b style="display:none">Mastercard</b></span>
+        </div>
         <h4>Card / ATM Transfer</h4>
         <p>Visa, Mastercard &amp; local bank cards</p>
       </div>
       <div class="pay-card">
-        <i class="fa-brands fa-bitcoin"></i>
+        <div class="pay-logos">
+          <span class="pay-chip"><img src="images/pay-bitcoin.png" alt="Bitcoin" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';"><b style="display:none">BTC</b></span>
+        </div>
         <h4>Bitcoin &amp; Crypto</h4>
         <p>Accepted for international clients</p>
       </div>
