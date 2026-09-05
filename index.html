@@ -30,6 +30,8 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 html { scroll-behavior: smooth; }
+section[id] { scroll-margin-top: 122px; }
+@media (min-width: 900px) { section[id] { scroll-margin-top: 88px; } }
 body {
   font-family: 'Plus Jakarta Sans', sans-serif;
   background-color: var(--bg-dark);
@@ -122,9 +124,16 @@ header {
   transition: var(--transition);
 }
 
-.header-utility { display: flex; justify-content: space-between; align-items: center; padding: 1rem 20px; }
-.logo-icon { width: 42px; height: 42px; object-fit: cover; border-radius: 8px; border: 1px solid var(--border-glow); }
+.header-utility { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 0.85rem 20px; }
+.header-utility .menu-toggle { justify-self: start; }
+.header-utility > a { justify-self: center; }
+.site-logo { height: 40px; width: auto; max-width: 150px; object-fit: contain; border-radius: 8px; border: 1px solid var(--border-glow); background: #fff; padding: 3px 8px; }
 .logo-mark { width: 42px; height: 42px; background: linear-gradient(135deg, var(--cyan-glow), var(--electric-blue)); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #000; font-size: 1.2rem; }
+
+/* Second header strip — brand name banner beneath the utility bar, mobile only */
+.brand-strip { display: flex; align-items: center; justify-content: center; gap: 0.6rem; padding: 0.55rem 20px; border-top: 1px solid rgba(255,255,255,0.05); background: rgba(0, 229, 255, 0.03); }
+.brand-strip span { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.18em; color: var(--cyan-glow); text-transform: uppercase; }
+.brand-strip i { color: var(--cyan-glow); font-size: 0.5rem; }
 
 /* Desktop header is hidden by default; only shown at >=900px. This is the fix for the
    mobile "duplicate nav text" bug — without this rule the desktop nav list rendered
@@ -133,9 +142,10 @@ header {
 
 @media (min-width: 900px) {
   .header-utility { display: none; }
+  .brand-strip { display: none; }
   .header-desktop { display: flex; align-items: center; justify-content: space-between; padding: 0.9rem 0; }
-  .brand-lockup { display: flex; align-items: center; gap: 0.8rem; text-decoration: none; color: var(--text-main); font-weight: 800; font-size: 1.15rem; letter-spacing: -0.02em; }
-  .brand-lockup span { background: linear-gradient(135deg, #fff, var(--text-muted)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .brand-lockup { display: flex; align-items: center; text-decoration: none; }
+  .brand-lockup .site-logo { height: 46px; max-width: 190px; }
   
   .nav-desktop ul { display: flex; list-style: none; align-items: center; gap: 2rem; }
   .nav-desktop a { text-decoration: none; color: var(--text-muted); font-weight: 600; font-size: 0.85rem; letter-spacing: 0.04em; text-transform: uppercase; transition: var(--transition); }
@@ -216,8 +226,8 @@ header {
    Desktop hero above is untouched.
    ============================================ */
 @media (max-width: 767px) {
-  .hero { min-height: 100svh; padding-top: 74px; flex-direction: column; align-items: stretch; justify-content: flex-start; }
-  .hero-content { padding: 2rem 0 1.5rem; flex: none; }
+  .hero { min-height: 0; padding-top: 116px; padding-bottom: 1.8rem; flex-direction: column; align-items: stretch; justify-content: flex-start; }
+  .hero-content { padding: 1.8rem 0 1.4rem; flex: none; }
   .hero-strip { flex: none; width: 100%; }
 
   .tech-badge { font-size: 0.66rem; padding: 0.35rem 0.85rem 0.35rem 0.7rem; margin-bottom: 1.1rem; gap: 0.45rem; }
@@ -258,7 +268,7 @@ header {
     gap: 0.5rem;
   }
 
-  .scroll-cue { display: flex; }
+  .scroll-cue { display: flex; position: relative; left: auto; bottom: auto; transform: none; margin: 0.4rem auto 0; align-self: center; }
 }
 
 /* Stats Bar */
@@ -324,6 +334,7 @@ header {
 .toolkit-head .th-left { display: flex; align-items: center; gap: 1rem; }
 .toolkit-head i.tk-icon { width: 40px; height: 40px; background: rgba(0, 229, 255, 0.08); border-radius: 8px; border: 1px solid var(--border-glow); display: flex; align-items: center; justify-content: center; color: var(--cyan-glow); font-size: 1.1rem; }
 .toolkit-head h4 { font-size: 0.95rem; font-weight: 700; color: #fff; }
+.tk-own-tag { display: inline-block; background: rgba(255, 107, 26, 0.12); color: var(--neon-orange); border: 1px solid rgba(255, 107, 26, 0.35); font-size: 0.6rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; padding: 0.15rem 0.5rem; border-radius: 20px; margin-left: 0.6rem; vertical-align: middle; }
 .toolkit-head .plus { color: var(--cyan-glow); transition: var(--transition); }
 .toolkit-item.active .plus { transform: rotate(135deg); color: var(--neon-orange); }
 .toolkit-body { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
@@ -332,18 +343,36 @@ header {
 .toolkit-body-inner p { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 0.8rem; }
 .toolkit-body-inner a { color: var(--cyan-glow); font-weight: 700; font-size: 0.82rem; text-decoration: none; font-family: 'JetBrains Mono', monospace; }
 
-/* Testimonials */
-.testimonials { padding: 6rem 0; }
-.testimonials-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
-@media (min-width: 768px) { .testimonials-grid { grid-template-columns: repeat(2, 1fr); } }
-.t-card { background: var(--bg-card); border: 1px solid var(--border-glow); padding: 1.8rem; border-radius: 16px; backdrop-filter: var(--glass-blur); position: relative; }
-.t-card .quote-icon { color: var(--cyan-glow); font-size: 1.5rem; margin-bottom: 1rem; opacity: 0.6; }
-.t-text { color: var(--text-main); margin-bottom: 1.5rem; font-size: 0.95rem; line-height: 1.7; }
-.t-author { display: flex; align-items: center; gap: 1rem; }
-.t-avatar { width: 46px; height: 46px; border-radius: 50%; object-fit: cover; border: 1px solid var(--cyan-glow); }
-.t-avatar-fallback { width: 46px; height: 46px; border-radius: 50%; background: linear-gradient(135deg, var(--electric-blue), var(--cyan-glow)); color: #000; font-weight: 800; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; }
-.t-info h4 { font-size: 0.95rem; font-weight: 700; color: #fff; }
-.t-info p { font-size: 0.78rem; color: var(--text-muted); }
+/* Institutions & Credibility */
+.institutions { padding: 5rem 0; border-top: var(--glass-border); position: relative; }
+.badge-cloud { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.7rem; max-width: 900px; margin: 0 auto 2rem; }
+.badge-chip { display: flex; align-items: center; gap: 0.5rem; background: var(--bg-card); border: 1px solid var(--border-glow); padding: 0.6rem 1.1rem; border-radius: 30px; font-size: 0.8rem; font-weight: 600; color: var(--text-muted); transition: var(--transition); }
+.badge-chip:hover { border-color: var(--cyan-glow); color: var(--cyan-glow); transform: translateY(-3px); box-shadow: var(--shadow-glow); }
+.badge-chip i { color: var(--cyan-glow); font-size: 0.75rem; }
+.institutions-note { text-align: center; max-width: 700px; margin: 0 auto 3rem; color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; }
+.institutions-note strong { color: #fff; }
+
+.credibility-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; max-width: 960px; margin: 0 auto; }
+@media (min-width: 768px) { .credibility-grid { grid-template-columns: repeat(4, 1fr); } }
+.cred-card { background: var(--bg-card); border: 1px solid var(--border-glow); border-radius: 14px; padding: 1.5rem 1.2rem; text-align: center; backdrop-filter: var(--glass-blur); transition: var(--transition); }
+.cred-card:hover { border-color: var(--cyan-glow); transform: translateY(-4px); box-shadow: var(--shadow-glow); }
+.cred-card i { font-size: 1.6rem; color: var(--cyan-glow); margin-bottom: 0.8rem; display: block; }
+.cred-card h4 { font-size: 0.9rem; font-weight: 700; color: #fff; margin-bottom: 0.4rem; }
+.cred-card p { font-size: 0.78rem; color: var(--text-muted); line-height: 1.4; }
+
+/* Payment Options (replaces testimonials) */
+.pay-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; max-width: 960px; margin: 0 auto; }
+@media (min-width: 768px) { .pay-grid { grid-template-columns: repeat(4, 1fr); } }
+.pay-card { background: var(--bg-card); border: 1px solid var(--border-glow); border-radius: 14px; padding: 1.8rem 1.2rem; text-align: center; backdrop-filter: var(--glass-blur); transition: var(--transition); }
+.pay-card:hover { border-color: var(--cyan-glow); transform: translateY(-4px); box-shadow: var(--shadow-glow); }
+.pay-card i { font-size: 1.8rem; color: var(--cyan-glow); margin-bottom: 1rem; display: block; }
+.pay-card h4 { font-size: 0.95rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; }
+.pay-card p { font-size: 0.78rem; color: var(--text-muted); line-height: 1.5; }
+.pay-secure-note { text-align: center; margin-top: 2.5rem; color: var(--text-muted); font-size: 0.82rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem; }
+.pay-secure-note i { color: var(--cyan-glow); }
+
+/* Payment Options Section */
+.payments { padding: 6rem 0; }
 
 /* CTA Box */
 .cta { padding: 5rem 0; }
@@ -395,16 +424,17 @@ footer { background: #02040a; border-top: var(--glass-border); color: var(--text
       <span></span><span></span><span></span>
     </button>
     <a href="index.html">
-      <img src="images/logo.png" alt="Jaynite Digital Solutions" class="logo-icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <img src="images/logo.png" alt="Jaynite Digital Solutions" class="site-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
       <span class="logo-mark" style="display:none"><i class="fas fa-bolt"></i></span>
     </a>
   </div>
 
+  <div class="brand-strip"><i class="fas fa-diamond"></i><span>Jaynite Digital Solutions</span><i class="fas fa-diamond"></i></div>
+
   <div class="container header-desktop">
     <a href="index.html" class="brand-lockup">
-      <img src="images/logo.png" alt="Jaynite Digital Solutions" class="logo-icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <img src="images/logo.png" alt="Jaynite Digital Solutions" class="site-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
       <span class="logo-mark" style="display:none"><i class="fas fa-bolt"></i></span>
-      <span>Jaynite Digital</span>
     </a>
     <nav class="nav-desktop">
       <ul>
@@ -439,7 +469,7 @@ footer { background: #02040a; border-top: var(--glass-border); color: var(--text
 <!-- Mobile Menu -->
 <div class="mobile-menu" id="mobileMenu">
   <div class="mm-top">
-    <img src="images/logo.png" alt="Jaynite Digital Solutions" class="logo-icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+    <img src="images/logo.png" alt="Jaynite Digital Solutions" class="site-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
     <span class="logo-mark" style="display:none"><i class="fas fa-bolt"></i></span>
     <button class="mm-close" id="mmClose" aria-label="Close menu">&times;</button>
   </div>
@@ -636,6 +666,54 @@ footer { background: #02040a; border-top: var(--glass-border); color: var(--text
   </div>
 </section>
 
+<!-- Institutions & Credibility -->
+<section class="institutions" id="institutions">
+  <div class="container">
+    <div class="section-label">
+      <span class="kicker">// Trusted Across Ghana</span>
+      <h2>Institutions &amp; Registrations We Handle</h2>
+      <p>From national platforms to personal paperwork, we help individuals and businesses navigate the systems that matter.</p>
+    </div>
+
+    <div class="badge-cloud">
+      <span class="badge-chip"><i class="fas fa-check"></i> SSNIT</span>
+      <span class="badge-chip"><i class="fas fa-check"></i> GRA</span>
+      <span class="badge-chip"><i class="fas fa-check"></i> Ghana.gov</span>
+      <span class="badge-chip"><i class="fas fa-check"></i> Passport Office</span>
+      <span class="badge-chip"><i class="fas fa-check"></i> GhanaEPS</span>
+      <span class="badge-chip"><i class="fas fa-check"></i> PPA</span>
+      <span class="badge-chip"><i class="fas fa-check"></i> NSA</span>
+      <span class="badge-chip"><i class="fas fa-check"></i> WAEC</span>
+      <span class="badge-chip"><i class="fas fa-check"></i> CSSPS</span>
+      <span class="badge-chip"><i class="fas fa-check"></i> NMC</span>
+    </div>
+    <p class="institutions-note">We also assist with <strong>NMC Registration</strong>, <strong>Nursing Training College forms</strong>, and <strong>University Admission forms</strong> — guiding you through every field so nothing gets rejected for a simple mistake.</p>
+
+    <div class="credibility-grid">
+      <div class="cred-card">
+        <i class="fas fa-image"></i>
+        <h4>Picture Framing</h4>
+        <p>Custom frames for certificates, portraits &amp; awards.</p>
+      </div>
+      <div class="cred-card">
+        <i class="fas fa-images"></i>
+        <h4>Scanning &amp; Digitization</h4>
+        <p>Documents &amp; photos scanned and archived digitally.</p>
+      </div>
+      <div class="cred-card">
+        <i class="fas fa-palette"></i>
+        <h4>Graphic Design</h4>
+        <p>Logos, posters, invitations &amp; branded artwork.</p>
+      </div>
+      <div class="cred-card">
+        <i class="fas fa-file-signature"></i>
+        <h4>Form Filling Assistance</h4>
+        <p>Guided, error-free completion of official applications.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- Toolkit Section -->
 <section class="toolkit" id="toolkit">
   <div class="container">
@@ -661,37 +739,53 @@ footer { background: #02040a; border-top: var(--glass-border); color: var(--text
         <div class="toolkit-head"><div class="th-left"><i class="fas fa-compress tk-icon"></i><h4>Compress Files &amp; Media</h4></div><span class="plus"><i class="fas fa-plus"></i></span></div>
         <div class="toolkit-body"><div class="toolkit-body-inner"><p>Reduce PDF and image payload sizes without quality degradation.</p><a href="https://www.ilovepdf.com/compress_pdf" target="_blank" rel="noopener">Open iLovePDF Compress →</a></div></div>
       </div>
+      <div class="toolkit-item">
+        <div class="toolkit-head"><div class="th-left"><i class="fas fa-sim-card tk-icon"></i><h4>Buy Data Bundles<span class="tk-own-tag">Our Service</span></h4></div><span class="plus"><i class="fas fa-plus"></i></span></div>
+        <div class="toolkit-body"><div class="toolkit-body-inner"><p>Instant MTN, Telecel &amp; AirtelTigo data top-ups at the best rates.</p><a href="https://www.cheapdata.shop/shop/primedata-jaynite-digital-solutions-mkfmqvnc" target="_blank" rel="noopener">Buy Data Now →</a></div></div>
+      </div>
+      <div class="toolkit-item">
+        <div class="toolkit-head"><div class="th-left"><i class="fas fa-graduation-cap tk-icon"></i><h4>Check WASSCE / BECE Results<span class="tk-own-tag">Our Service</span></h4></div><span class="plus"><i class="fas fa-plus"></i></span></div>
+        <div class="toolkit-body"><div class="toolkit-body-inner"><p>Fast, reliable result-checking assistance for WAEC exams.</p><a href="services.html#checkers">View Results Checkers →</a></div></div>
+      </div>
+      <div class="toolkit-item">
+        <div class="toolkit-head"><div class="th-left"><i class="fas fa-ticket tk-icon"></i><h4>Buy Result Checker PINs<span class="tk-own-tag">Our Service</span></h4></div><span class="plus"><i class="fas fa-plus"></i></span></div>
+        <div class="toolkit-body"><div class="toolkit-body-inner"><p>WAEC &amp; CSSPS checker cards available for walk-in or delivery.</p><a href="services.html#checkers">Get a Checker →</a></div></div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- Testimonials -->
-<section class="testimonials" id="testimonials">
+<!-- Payment Options -->
+<section class="payments" id="payments">
   <div class="container">
     <div class="section-label">
-      <span class="kicker">// Verified Reviews</span>
-      <h2>Client Endorsements</h2>
+      <span class="kicker">// Convenient &amp; Secure</span>
+      <h2>Payment Options We Accept</h2>
+      <p>Pay however works best for you — locally or from abroad.</p>
     </div>
-    <div class="testimonials-grid">
-      <div class="t-card">
-        <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
-        <p class="t-text">Jaynite Digital Solutions transformed our culinary brand with their exceptional web development services. The speed, user experience, and modern aesthetics exceeded our expectations.</p>
-        <div class="t-author">
-          <img src="images/louisa.jpg" alt="Louisa Boateng" class="t-avatar" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-          <div class="t-avatar-fallback" style="display:none">LB</div>
-          <div class="t-info"><h4>Louisa Boateng</h4><p>Co-Founder, LOUEL Cuisine</p></div>
-        </div>
+    <div class="pay-grid">
+      <div class="pay-card">
+        <i class="fas fa-mobile-screen-button"></i>
+        <h4>Mobile Money</h4>
+        <p>MTN MoMo, Telecel Cash &amp; AirtelTigo Money</p>
       </div>
-      <div class="t-card">
-        <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
-        <p class="t-text">Outstanding cybersecurity solutions and technical advice. Their proactive protection and risk assessments gave our estate platform total peace of mind.</p>
-        <div class="t-author">
-          <img src="images/loveson.jpg" alt="Kpausah Loveson Snr" class="t-avatar" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-          <div class="t-avatar-fallback" style="display:none">KL</div>
-          <div class="t-info"><h4>Kpausah Loveson Snr</h4><p>CEO, Destin Estate Ghana</p></div>
-        </div>
+      <div class="pay-card">
+        <i class="fas fa-building-columns"></i>
+        <h4>Bank Transfer</h4>
+        <p>Direct transfer to our business account</p>
+      </div>
+      <div class="pay-card">
+        <i class="fas fa-credit-card"></i>
+        <h4>Card / ATM Transfer</h4>
+        <p>Visa, Mastercard &amp; local bank cards</p>
+      </div>
+      <div class="pay-card">
+        <i class="fa-brands fa-bitcoin"></i>
+        <h4>Bitcoin &amp; Crypto</h4>
+        <p>Accepted for international clients</p>
       </div>
     </div>
+    <p class="pay-secure-note"><i class="fas fa-lock"></i> All transactions are confirmed directly with our team for your security.</p>
   </div>
 </section>
 
@@ -714,7 +808,7 @@ footer { background: #02040a; border-top: var(--glass-border); color: var(--text
   <div class="container">
     <div class="footer-content">
       <div class="footer-section">
-        <h3>Jaynite Digital Solutions</h3>
+        <h3>Jaynite Digital</h3>
         <p style="margin-bottom: 1rem; color: var(--text-muted);">Empowering digital innovation in Ghana with cutting-edge web design, publication media, and IT support services.</p>
         <div class="social-icons">
           <a href="https://youtube.com/@skillsavvygh?si=VHCLWgZXM1sQSvXE" aria-label="YouTube" target="_blank"><i class="fab fa-youtube"></i></a>
@@ -730,7 +824,8 @@ footer { background: #02040a; border-top: var(--glass-border); color: var(--text
           <li><a href="index.html"><i class="fas fa-angle-right"></i> Home</a></li>
           <li><a href="services.html"><i class="fas fa-angle-right"></i> Services</a></li>
           <li><a href="about.html"><i class="fas fa-angle-right"></i> About</a></li>
-          <li><a href="#testimonials"><i class="fas fa-angle-right"></i> Testimonials</a></li>
+          <li><a href="#institutions"><i class="fas fa-angle-right"></i> Institutions We Support</a></li>
+          <li><a href="#payments"><i class="fas fa-angle-right"></i> Payment Options</a></li>
           <li><a href="#toolkit"><i class="fas fa-angle-right"></i> Free Tools</a></li>
           <li><a href="contact.html"><i class="fas fa-angle-right"></i> Contact</a></li>
         </ul>
