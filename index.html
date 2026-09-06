@@ -292,7 +292,6 @@ header {
 @media (min-width: 640px) { .bento-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (min-width: 1024px) { 
   .bento-grid { grid-template-columns: repeat(3, 1fr); } 
-  .svc-card.featured { grid-column: span 2; }
 }
 
 .svc-card {
@@ -345,11 +344,14 @@ header {
 
 /* Institutions & Credibility */
 .institutions { padding: 5rem 0; border-top: var(--glass-border); position: relative; }
-.badge-cloud { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.7rem; max-width: 900px; margin: 0 auto 2rem; }
-.badge-chip { display: flex; align-items: center; gap: 0.5rem; background: var(--bg-card); border: 1px solid var(--border-glow); padding: 0.6rem 1.1rem; border-radius: 30px; font-size: 0.8rem; font-weight: 600; color: var(--text-muted); transition: var(--transition); }
-.badge-chip:hover { border-color: var(--cyan-glow); color: var(--cyan-glow); transform: translateY(-3px); box-shadow: var(--shadow-glow); }
-.badge-chip i { color: var(--cyan-glow); font-size: 0.75rem; }
-.badge-logo { height: 20px; width: auto; max-width: 68px; object-fit: contain; border-radius: 3px; }
+.logo-marquee { overflow: hidden; margin: 0 auto 2.5rem; max-width: 100%; -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+.logo-track { display: flex; gap: 1rem; width: max-content; animation: marqueeScroll 34s linear infinite; }
+.logo-marquee:hover .logo-track { animation-play-state: paused; }
+.logo-tile { flex: 0 0 auto; width: 108px; height: 68px; background: #fff; border: 1px solid var(--border-glow); border-radius: 12px; display: flex; align-items: center; justify-content: center; padding: 0.7rem; }
+.logo-tile img { max-width: 100%; max-height: 100%; object-fit: contain; }
+.logo-tile b { color: #0a0e1a; font-size: 0.68rem; font-weight: 800; text-align: center; line-height: 1.2; }
+@keyframes marqueeScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .logo-track { animation: none; flex-wrap: wrap; justify-content: center; } .logo-marquee { -webkit-mask-image: none; mask-image: none; } }
 .institutions-note { text-align: center; max-width: 700px; margin: 0 auto 3rem; color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; }
 .institutions-note strong { color: #fff; }
 
@@ -374,9 +376,9 @@ header {
 .pay-card h4 { font-size: 0.95rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; }
 .pay-card p { font-size: 0.78rem; color: var(--text-muted); line-height: 1.5; }
 .pay-logos { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem; margin-bottom: 1rem; }
-.pay-chip { display: inline-flex; align-items: center; justify-content: center; background: #fff; border-radius: 6px; padding: 0.3rem 0.5rem; min-width: 40px; height: 30px; }
-.pay-chip img { height: 18px; width: auto; max-width: 52px; object-fit: contain; display: block; }
-.pay-chip b { color: #0a0e1a; font-size: 0.62rem; font-weight: 800; }
+.pay-chip { display: inline-flex; align-items: center; justify-content: center; background: #fff; border-radius: 8px; width: 64px; height: 44px; flex: 0 0 auto; padding: 0.4rem; }
+.pay-chip img { max-width: 100%; max-height: 100%; object-fit: contain; display: block; }
+.pay-chip b { color: #0a0e1a; font-size: 0.6rem; font-weight: 800; text-align: center; line-height: 1.15; }
 .pay-secure-note { text-align: center; margin-top: 2.5rem; color: var(--text-muted); font-size: 0.82rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem; }
 .pay-secure-note i { color: var(--cyan-glow); }
 
@@ -595,7 +597,7 @@ footer { background: #02040a; border-top: var(--glass-border); color: var(--text
     
     <div class="bento-grid">
       <!-- Card 1: Web (Featured) -->
-      <a href="services.html#web" class="svc-card featured">
+      <a href="services.html#web" class="svc-card">
         <div class="svc-photo">
           <img src="images/service-web.jpg" alt="Web and app development" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
           <div class="svc-fallback-icon" style="display:none"><i class="fas fa-laptop-code"></i></div>
@@ -679,25 +681,41 @@ footer { background: #02040a; border-top: var(--glass-border); color: var(--text
 <section class="institutions" id="institutions">
   <div class="container">
     <div class="section-label">
-      <span class="kicker">// Trusted Across Ghana</span>
-      <h2>Public Knowledge &amp; Application Support</h2>
+      <span class="kicker">// Public Knowledge</span>
+      <h2>Application Support</h2>
       <p>From national platforms to personal paperwork, we help individuals and businesses navigate the systems that matter.</p>
     </div>
 
-    <div class="badge-cloud">
-      <span class="badge-chip"><img src="images/inst-ssnit.png" alt="" class="badge-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';"><i class="fas fa-check" style="display:none"></i> SSNIT</span>
-      <span class="badge-chip"><img src="images/inst-gra.png" alt="" class="badge-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';"><i class="fas fa-check" style="display:none"></i> GRA</span>
-      <span class="badge-chip"><img src="images/inst-ghanagov.png" alt="" class="badge-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';"><i class="fas fa-check" style="display:none"></i> Ghana.gov</span>
-      <span class="badge-chip"><img src="images/inst-passport.png" alt="" class="badge-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';"><i class="fas fa-check" style="display:none"></i> Passport Application</span>
-      <span class="badge-chip"><img src="images/inst-ghanaeps.png" alt="" class="badge-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';"><i class="fas fa-check" style="display:none"></i> GhanaEPS</span>
-      <span class="badge-chip"><img src="images/inst-ppa.png" alt="" class="badge-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';"><i class="fas fa-check" style="display:none"></i> PPA</span>
-      <span class="badge-chip"><img src="images/inst-nsa.png" alt="" class="badge-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';"><i class="fas fa-check" style="display:none"></i> NSA</span>
-      <span class="badge-chip"><img src="images/inst-waec.png" alt="" class="badge-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';"><i class="fas fa-check" style="display:none"></i> WAEC</span>
-      <span class="badge-chip"><img src="images/inst-cssps.png" alt="" class="badge-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';"><i class="fas fa-check" style="display:none"></i> CSSPS</span>
-      <span class="badge-chip"><img src="images/inst-nmc.png" alt="" class="badge-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';"><i class="fas fa-check" style="display:none"></i> NMC</span>
-      <span class="badge-chip"><img src="images/inst-dvla.png" alt="" class="badge-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';"><i class="fas fa-check" style="display:none"></i> DVLA</span>
-      <span class="badge-chip"><img src="images/inst-nia.png" alt="" class="badge-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';"><i class="fas fa-check" style="display:none"></i> Ghana Card (NIA)</span>
-      <span class="badge-chip"><img src="images/inst-rgd.png" alt="" class="badge-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';"><i class="fas fa-check" style="display:none"></i> Business Registration (RGD)</span>
+    <div class="logo-marquee">
+      <div class="logo-track">
+        <span class="logo-tile"><img src="images/inst-ssnit.png" alt="SSNIT" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';"><b style="display:none">SSNIT</b></span>
+        <span class="logo-tile"><img src="images/inst-gra.png" alt="GRA" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';"><b style="display:none">GRA</b></span>
+        <span class="logo-tile"><img src="images/inst-ghanagov.png" alt="Ghana.gov" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';"><b style="display:none">Ghana.gov</b></span>
+        <span class="logo-tile"><img src="images/inst-passport.png" alt="Passport Application" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';"><b style="display:none">Passport</b></span>
+        <span class="logo-tile"><img src="images/inst-ghanaeps.png" alt="GhanaEPS" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';"><b style="display:none">GhanaEPS</b></span>
+        <span class="logo-tile"><img src="images/inst-ppa.png" alt="PPA" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';"><b style="display:none">PPA</b></span>
+        <span class="logo-tile"><img src="images/inst-nsa.png" alt="NSA" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';"><b style="display:none">NSA</b></span>
+        <span class="logo-tile"><img src="images/inst-waec.png" alt="WAEC" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';"><b style="display:none">WAEC</b></span>
+        <span class="logo-tile"><img src="images/inst-cssps.png" alt="CSSPS" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';"><b style="display:none">CSSPS</b></span>
+        <span class="logo-tile"><img src="images/inst-nmc.png" alt="NMC" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';"><b style="display:none">NMC</b></span>
+        <span class="logo-tile"><img src="images/inst-dvla.png" alt="DVLA" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';"><b style="display:none">DVLA</b></span>
+        <span class="logo-tile"><img src="images/inst-nia.png" alt="Ghana Card (NIA)" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';"><b style="display:none">Ghana Card</b></span>
+        <span class="logo-tile"><img src="images/inst-rgd.png" alt="Business Registration (RGD)" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';"><b style="display:none">RGD</b></span>
+        <!-- duplicate set for seamless loop -->
+        <span class="logo-tile" aria-hidden="true"><img src="images/inst-ssnit.png" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';"><b style="display:none">SSNIT</b></span>
+        <span class="logo-tile" aria-hidden="true"><img src="images/inst-gra.png" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';"><b style="display:none">GRA</b></span>
+        <span class="logo-tile" aria-hidden="true"><img src="images/inst-ghanagov.png" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';"><b style="display:none">Ghana.gov</b></span>
+        <span class="logo-tile" aria-hidden="true"><img src="images/inst-passport.png" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';"><b style="display:none">Passport</b></span>
+        <span class="logo-tile" aria-hidden="true"><img src="images/inst-ghanaeps.png" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';"><b style="display:none">GhanaEPS</b></span>
+        <span class="logo-tile" aria-hidden="true"><img src="images/inst-ppa.png" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';"><b style="display:none">PPA</b></span>
+        <span class="logo-tile" aria-hidden="true"><img src="images/inst-nsa.png" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';"><b style="display:none">NSA</b></span>
+        <span class="logo-tile" aria-hidden="true"><img src="images/inst-waec.png" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';"><b style="display:none">WAEC</b></span>
+        <span class="logo-tile" aria-hidden="true"><img src="images/inst-cssps.png" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';"><b style="display:none">CSSPS</b></span>
+        <span class="logo-tile" aria-hidden="true"><img src="images/inst-nmc.png" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';"><b style="display:none">NMC</b></span>
+        <span class="logo-tile" aria-hidden="true"><img src="images/inst-dvla.png" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';"><b style="display:none">DVLA</b></span>
+        <span class="logo-tile" aria-hidden="true"><img src="images/inst-nia.png" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';"><b style="display:none">Ghana Card</b></span>
+        <span class="logo-tile" aria-hidden="true"><img src="images/inst-rgd.png" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';"><b style="display:none">RGD</b></span>
+      </div>
     </div>
     <p class="institutions-note">We assist with all kinds of <strong>Online Registrations</strong>, <strong>Teachers and Nursing Training College forms</strong>, and <strong>University Admission forms</strong> — guiding you through every field so nothing gets rejected for a simple mistake.</p>
 
